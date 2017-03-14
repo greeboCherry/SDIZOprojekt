@@ -3,6 +3,16 @@
 #include <stdio.h>
 
 
+void List::insert(uint32_t position, int32_t value)
+{
+	/*
+	NYI
+	uint32_t counter = 0;
+	Node * it = _head;
+	while()
+	*/
+}
+
 //pierwsza implementacja, 
 //TODO refactor jak ju¿ bêdzie insert
 void List::pushFront(int32_t value)
@@ -36,7 +46,7 @@ void List::pushFront(int32_t value)
 	_head->_prev = NULL;
 	
 }
-//prints the whole list, prints head and tail twice to be sure
+
 void List::printStructure()
 {
 	Node * it = _head;

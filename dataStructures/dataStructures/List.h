@@ -38,9 +38,9 @@ private:
 
 public:
 	void insert(uint32_t position, int32_t value);
-
+	//creates new element at the beginning of the list
 	void pushFront(int32_t value);
-
+	//prints the whole list, prints head and tail twice to be sure
 	void printStructure();
 
 };
