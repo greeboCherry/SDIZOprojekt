@@ -5,46 +5,74 @@
 
 void List::insert(uint32_t position, int32_t value)
 {
-	/*
-	NYI
 	uint32_t counter = 0;
 	Node * it = _head;
-	while()
-	*/
+	do {
+		if (counter == position)
+		{
+			insert(it, value);
+			return;
+		}
+		counter++;
+	} while (it = it->getNext());
+	
 }
+
+void List::insert(Node * position, int32_t value)
+{
+		Node* temp = new Node;
+	
+		temp->key = value;
+		temp->_prev = position;
+		temp->_next = position->_next;
+		position->_next = temp;
+		if (temp->_next)
+		{
+			temp->_next->_prev = temp;
+		}
+		else
+			_tail = temp;
+}
+
+void List::erase(Node * position)
+{
+	Node* temp = position->_prev;
+	temp->_next = position->_next;
+	delete position;
+}
+
+List::Node* List::find(int32_t key)
+{
+	List::Node* temp = _head;
+	do 
+	{
+		if (temp->key == key) return temp;
+	} while (temp=temp->getNext());
+}
+
 
 //pierwsza implementacja, 
 //TODO refactor jak ju¿ bêdzie insert
 void List::pushFront(int32_t value)
 {
-	//jezeli juz cos mamy
 	if (_head!=NULL)
 	{
-		//zapisanie adresu sterego head'a do temp'a
 		Node* temp = _head;
-		//tworzenie nowego wezla, przypisanie mu wartosci
 		_head = new Node;
 		
-		//zaktualizowanie powi¹zañ temp'a jeœli istnieje
 		if (temp)
 		{
 			_head->_next = temp;
 			temp->_prev = _head;
-
-
-
 		}
-		//jeœli nie istnieje temp to head jest tailem
 		else
 			_tail = _head;
 	}
 	else
-		//jezeli lista byla pusta
 		_head = _tail = new Node;
-	//przypisanie  wartosci
+
 	_head->key = value;
-	_head->_prev = NULL;
-	
+	_head->_prev = NULL;	
 }
 
 void List::printStructure()

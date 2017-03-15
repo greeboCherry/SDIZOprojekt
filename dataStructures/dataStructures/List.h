@@ -5,14 +5,14 @@
 class List
 {
 private:
-
 	struct Node
 	{
 	friend class List;
-	private:
+	public:
 		int32_t key;	//actual value
-		Node * _next = NULL;
-		Node * _prev = NULL;
+	protected:
+		Node * _next = NULL;	//node toward the tail
+		Node * _prev = NULL;	//node toward the head
 	public:
 		Node* getPrev()
 		{
@@ -37,11 +37,26 @@ private:
 	Node * _tail = NULL;	//pointer to the last node
 
 public:
+
+	class Iterator : private Node
+	{
+	
+	};
+	
+	//creates new element at front of @position	
 	void insert(uint32_t position, int32_t value);
+	//creates new element at front of @position
+	void insert(Node * position, int32_t value);
+	//removes the node @position
+	void erase(Node * position);
+
+	List::Node* find(int32_t key);
 	//creates new element at the beginning of the list
 	void pushFront(int32_t value);
 	//prints the whole list, prints head and tail twice to be sure
 	void printStructure();
-
+	//tells if the list is empty
+	
+	bool isEmpty() { return (_head); }
 };
 
