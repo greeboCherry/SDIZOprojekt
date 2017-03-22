@@ -30,17 +30,28 @@ void test1()
 	List * list = new List;
 	list->pushFront(1);
 	list->pushFront(100);
-	list->pushFront(123);
+	list->pushBack(123);
+	printf("100, 1, 123\n");
+	list->printStructure();
 	list->insert((uint32_t)0, 13);
-	list->insert(1, 26);
+	list->erase(123);
+	printf("13, 100, 1\n");
+	list->printStructure();
+	
+	list->insert((uint32_t)0, 26);
 	list->insert(1, 39);
 	list->insert(3, 666);
+	
+	printf("26, 39, 13, 666, 100, 1\n");
+	list->printStructure();
+	/*
 	list->pushBack(487);
 	list->erase(13);
 	//	Node* temp = list->insert(1, 256);
 	list->printStructure();
 	//	list->erase(temp);
 	//	list->printStructure();
+	*/
 	printf("End of test one, list\n");
 }
 

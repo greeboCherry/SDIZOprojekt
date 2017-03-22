@@ -17,6 +17,7 @@ void List::insert(uint32_t position, int32_t value)
 	}
 	else
 	{
+		position--;
 		uint32_t counter = 0;
 		Node * it = _head;
 		do {
@@ -96,7 +97,7 @@ void List::erase(Node * position)
 {
 	if (position == _tail)
 	{
-//		popBack();
+	popBack();
 	}
 	else if(position == _head)
 	{
@@ -127,12 +128,22 @@ void List::popFront()
 
 }
 
+void List::popBack()
+{
+	Node* temp = _tail->_prev;
+	temp->_next = NULL;
+	delete _tail;
+	_tail = temp;
+	size--;
+}
+
 List::Node* List::find(int32_t key)
 {
 	List::Node* temp = _head;
 	do 
 	{
-		if (temp->key == key) return temp;
+		if (temp->key == key) 
+			return temp;
 	} while (temp=temp->getNext());
 	
 		return NULL;
@@ -145,6 +156,7 @@ void List::printStructure()
 {
 	Node * it = _head;
 	int counter = 0;
+	printf("Size of this list is \t%i\n", size);
 	printf("Head\t\tKey:%d\t_prev:%p\t_next:%p\taddress:%p\n", (_head->key), _head->_prev, _head->_next, _head);
 	do
 	{
