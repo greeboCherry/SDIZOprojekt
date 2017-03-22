@@ -5,23 +5,42 @@
 
 void List::insert(uint32_t position, int32_t value)
 {
-	uint32_t counter = 0;
-	Node * it = _head;
-	do {
-		if (counter == position)
-		{
-			insert(it, value);
-			return;
-		}
-		counter++;
-	} while (it = it->getNext());
-	
+	if (position == 0)
+	{
+		pushFront(value);
+		return;
+	}
+	else if (position >= size)
+	{
+		pushBack(value);
+		return;
+	}
+	else
+	{
+		uint32_t counter = 0;
+		Node * it = _head;
+		do {
+			if (counter == position)
+			{
+				insert(it, value);
+				return;
+			}
+			counter++;
+		} while (it = it->getNext());
+	}
 }
 
 void List::insert(Node * position, int32_t value)
 {
+	if (!_head)
+	{
+		pushFront(value);
+		return;
+	}
+	else
+		size++;
 		Node* temp = new Node;
-	
+			
 		temp->key = value;
 		temp->_prev = position;
 		temp->_next = position->_next;
@@ -34,11 +53,78 @@ void List::insert(Node * position, int32_t value)
 			_tail = temp;
 }
 
+//
+void List::pushFront(int32_t value)
+{
+	if (_head != NULL)
+	{
+		//if head already exists, we must set new head and re-link old head
+		Node* temp = _head;
+		_head = new Node;
+
+			_head->_next = temp;
+			temp->_prev = _head;
+	}
+		//if there is no head, there is no tail, so new Node is the only one
+	else
+		_head = _tail = new Node;
+	//anyway we set values, and head has no _prev
+	_head->key = value;
+	_head->_prev = NULL;
+	size++;
+}
+
+void List::pushBack(int32_t value)
+{
+	//if it's empty, use pushFront so we can skip some ifs here
+	if (!_head)
+	{
+		pushFront(value);
+		return;
+	}
+	Node* temp = _tail;
+	_tail = new Node;
+	temp->_next = _tail;
+	_tail->_prev = temp;
+	_tail->key = value;
+	_tail->_next = NULL;
+	size++;
+
+}
+
 void List::erase(Node * position)
 {
-	Node* temp = position->_prev;
-	temp->_next = position->_next;
-	delete position;
+	if (position == _tail)
+	{
+//		popBack();
+	}
+	else if(position == _head)
+	{
+		popFront();
+	}
+	else
+	{
+		Node* temp = position->_prev;
+		temp->_next = position->_next;
+		delete position;
+		size--;
+
+	}
+}
+
+void List::erase(uint32_t value)
+{
+	erase(find(value));
+}
+
+void List::popFront()
+{
+	Node* temp = _head->_next;
+	temp->_prev = NULL;
+	delete _head;
+	_head = temp;
+	size--;
+
 }
 
 List::Node* List::find(int32_t key)
@@ -48,32 +134,12 @@ List::Node* List::find(int32_t key)
 	{
 		if (temp->key == key) return temp;
 	} while (temp=temp->getNext());
+	
+		return NULL;
 }
 
 
-//pierwsza implementacja, 
-//TODO refactor jak ju¿ bêdzie insert
-void List::pushFront(int32_t value)
-{
-	if (_head!=NULL)
-	{
-		Node* temp = _head;
-		_head = new Node;
-		
-		if (temp)
-		{
-			_head->_next = temp;
-			temp->_prev = _head;
-		}
-		else
-			_tail = _head;
-	}
-	else
-		_head = _tail = new Node;
 
-	_head->key = value;
-	_head->_prev = NULL;	
-}
 
 void List::printStructure()
 {
