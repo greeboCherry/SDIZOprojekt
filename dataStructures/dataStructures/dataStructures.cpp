@@ -2,7 +2,7 @@
 //
 #include <stdio.h>
 #include "List.h"
-
+#include "IContainer.h"
 /*
 Pytania:
 Czy lista mo¿e znaæ swój rozmiar?				ODP mo¿e
@@ -15,11 +15,12 @@ How to array?						ODP w sumie to piszê menad¿era do tablic a nie tablice
 */
 
 void test1();
+void test2();
 
 int main()
 {
 	int i;
-	test1();
+	test2();
 	scanf("%d", &i);
     return 0;
 }
@@ -55,3 +56,14 @@ void test1()
 	printf("End of test one, list\n");
 }
 
+//I could add srand to alert order, but why?
+void test2()
+{
+	printf("Test two, random inserting, list \n");
+	IContainer *container= new List;
+	for (int i = 0; i < 100;i++)
+	container->pushRandom(i);
+	container->printStructure();
+
+	printf("End of test two, list\n");
+}

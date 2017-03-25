@@ -1,7 +1,7 @@
 #include "List.h"
 
 #include <stdio.h>
-
+#include <cstdlib>
 
 void List::insert(uint32_t position, int32_t value)
 {
@@ -91,6 +91,17 @@ void List::pushBack(int32_t value)
 	_tail->_next = NULL;
 	size++;
 
+}
+
+void List::pushRandom(int32_t value)
+{
+	if (size)
+	{
+		int posistion = rand() % size;
+		insert(posistion, value);
+	}
+	else
+		pushFront(value);
 }
 
 void List::erase(Node * position)

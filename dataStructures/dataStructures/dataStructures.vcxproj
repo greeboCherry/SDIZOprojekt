@@ -143,6 +143,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Array.h" />
+    <ClInclude Include="IContainer.h" />
     <ClInclude Include="List.h" />
   </ItemGroup>
   <ItemGroup>

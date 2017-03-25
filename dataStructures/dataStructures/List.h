@@ -1,8 +1,11 @@
 #pragma once
 
 #include <stdint.h> //int32_t
+#include "IContainer.h"
+/*
 
-class List
+*/
+class List : virtual public IContainer
 {
 private:
 		struct Node
@@ -42,9 +45,11 @@ public:
 	//creates new element at front of @position
 	void insert(Node * position, int32_t value);
 	//creates new element at the beginning of the list
-	void pushFront(int32_t value);
+	void pushFront(int32_t value) override;
 	//creates new element at the end of the list
-	void pushBack(int32_t value);
+	void pushBack(int32_t value) override;
+	//creates new element inside the list
+	void pushRandom(int32_t value) override;
 
 	//removes the node @position
 	void erase(Node * position);
