@@ -18,7 +18,7 @@ void Array::insert(int32_t value, uint32_t index)
 	{
 		pushBack(value);
 	}
-	else if (index < size)
+	else //if (index < size)
 	{
 		int32_t* temp = new int32_t[size + 1];		//this will soon became new buffor
 
@@ -26,11 +26,10 @@ void Array::insert(int32_t value, uint32_t index)
 		
 		temp[index] = value;
 
-		memcpy(temp+index+1, buffor+index, sizeof (int32_t) * (size-index));	//copying cells from 0 to index
+		memcpy(temp+index+1, buffor+index, sizeof (int32_t) * (size-index ));	//copying cells from index+1 to size
 		size++;
 		delete[] buffor;
 		buffor = temp;
-		
 	}
 }
 
@@ -79,7 +78,7 @@ void Array::pushRandom(int32_t value)
 	if (size)
 	{
 		int posistion = rand() % size;
-		insert(posistion, value);
+		insert(value, posistion);
 	}
 	else
 		pushFront(value);

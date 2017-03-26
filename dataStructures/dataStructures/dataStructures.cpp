@@ -68,7 +68,7 @@ void test2()
 	for (int i = 0; i < 100; i++)
 	{
 		container->pushRandom(i);
-		//TODO find i as asserttion
+		//TODO find i as assertion
 	}
 			//a->insert(i, i);
 	container->printStructure();
