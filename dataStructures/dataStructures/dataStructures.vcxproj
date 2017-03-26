@@ -147,6 +147,7 @@
     <ClInclude Include="List.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Array.cpp" />
     <ClCompile Include="dataStructures.cpp" />
     <ClCompile Include="List.cpp" />
   </ItemGroup>

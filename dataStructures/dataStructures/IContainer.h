@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdint.h> //int32_t
 /*
 Interface made to make tests easier, reqs:
 

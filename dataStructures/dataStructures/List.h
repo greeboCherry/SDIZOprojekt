@@ -37,7 +37,7 @@ private:
 
 	Node * _head = NULL;	//pointer to the first node
 	Node * _tail = NULL;	//pointer to the last node
-	uint32_t size=0;	//TODO: implement this
+	uint32_t size=0;	
 public:
 
 	//creates new element at front of @position	
@@ -55,16 +55,17 @@ public:
 	void erase(Node * position);
 	//removes the firs node of given value
 	void erase(uint32_t value);
+	//removes the head
 	void popFront();
+	//removes the tail
 	void popBack();
 
-
+	//returns the first node of given value
 	List::Node* find(int32_t key);
 
 	//prints the whole list, prints head and tail twice to be sure
-
 	void printStructure();
 	//tells if the list is empty
-	bool isEmpty() { return (size>0); }
+	bool isEmpty() { return size==0; }
 };
 

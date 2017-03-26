@@ -1,8 +1,10 @@
 // dataStructures.cpp : Defines the entry point for the console application.
 //
 #include <stdio.h>
+#include "Array.h"
 #include "List.h"
 #include "IContainer.h"
+
 /*
 Pytania:
 Czy lista mo¿e znaæ swój rozmiar?				ODP mo¿e
@@ -20,6 +22,7 @@ void test2();
 int main()
 {
 	int i;
+
 	test2();
 	scanf("%d", &i);
     return 0;
@@ -60,9 +63,14 @@ void test1()
 void test2()
 {
 	printf("Test two, random inserting, list \n");
-	IContainer *container= new List;
-	for (int i = 0; i < 100;i++)
-	container->pushRandom(i);
+	IContainer *container= new Array;
+//	Array *a = new Array;
+	for (int i = 0; i < 100; i++)
+	{
+		container->pushRandom(i);
+		//TODO find i as asserttion
+	}
+			//a->insert(i, i);
 	container->printStructure();
 
 	printf("End of test two, list\n");
