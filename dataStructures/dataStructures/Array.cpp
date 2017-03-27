@@ -12,13 +12,13 @@ void Array::insert(int32_t value, uint32_t index)
 	}
 	else if (index == 0)
 	{
-			pushFront(value);
+		pushFront(value);
 	}
 	else if (index == size)
 	{
 		pushBack(value);
 	}
-	else //if (index < size)
+	else if (index < size)
 	{
 		int32_t* temp = new int32_t[size + 1];		//this will soon became new buffer
 
@@ -31,6 +31,26 @@ void Array::insert(int32_t value, uint32_t index)
 		delete[] buffer;
 		buffer = temp;
 	}
+	else
+	{
+		int32_t* temp = new int32_t[index + 1];
+		
+		memcpy(temp, buffer, sizeof int32_t * size);	//copying cells from 0 to index
+		temp[index] = value;
+		size = index + 1;
+		delete[] buffer;
+		buffer = temp;
+	}
+}
+
+void Array::remove(uint32_t index)
+{
+	int32_t* temp = new int32_t[size-1];
+	memcpy(temp, buffer, (index)*sizeof(int32_t));
+	memcpy(temp + index, buffer + index + 1, (size - index)*sizeof(int32_t));
+	delete[] buffer;
+	buffer = temp;
+	size--;
 }
 
 void Array::pushFront(int32_t value)
@@ -88,7 +108,8 @@ void Array::printStructure()
 {
 	for (uint32_t i = 0; i < size;i++)
 	{
-		printf("%d \t ", buffer[i]);
-	}
+		printf("%d\t", buffer[i]);
 
+	}
+	printf("\n");
 }

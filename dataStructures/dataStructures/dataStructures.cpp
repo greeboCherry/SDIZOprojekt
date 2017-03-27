@@ -65,13 +65,17 @@ void test2()
 	printf("Test two, random inserting, list \n");
 	IContainer *container= new Array;
 //	Array *a = new Array;
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		container->pushRandom(i);
 		//TODO find i as assertion
 	}
+	Array* a = (Array*)container;
+	a->insert(102, 20);
+	a->printStructure();
+	a->remove(20);
 			//a->insert(i, i);
-	container->printStructure();
+	a->printStructure();
 
 	printf("End of test two, list\n");
 }
