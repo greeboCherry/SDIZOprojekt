@@ -7,7 +7,7 @@ void Array::insert(int32_t value, uint32_t index)
 {
 	if (isEmpty())
 	{
-		buffor = new int32_t[1]{ value };
+		buffer = new int32_t[1]{ value };
 		size = 1;
 	}
 	else if (index == 0)
@@ -20,16 +20,16 @@ void Array::insert(int32_t value, uint32_t index)
 	}
 	else //if (index < size)
 	{
-		int32_t* temp = new int32_t[size + 1];		//this will soon became new buffor
+		int32_t* temp = new int32_t[size + 1];		//this will soon became new buffer
 
-		memcpy(temp, buffor, sizeof int32_t * index);	//copying cells from 0 to index
+		memcpy(temp, buffer, sizeof int32_t * index);	//copying cells from 0 to index
 		
 		temp[index] = value;
 
-		memcpy(temp+index+1, buffor+index, sizeof (int32_t) * (size-index ));	//copying cells from index+1 to size
+		memcpy(temp+index+1, buffer+index, sizeof (int32_t) * (size-index ));	//copying cells from index+1 to size
 		size++;
-		delete[] buffor;
-		buffor = temp;
+		delete[] buffer;
+		buffer = temp;
 	}
 }
 
@@ -37,16 +37,16 @@ void Array::pushFront(int32_t value)
 {
 	if (isEmpty())
 	{
-		buffor = new int32_t[1]{ value };
+		buffer = new int32_t[1]{ value };
 		size = 1;
 	}
 	else
 	{
-		int32_t* temp = new int32_t[size + 1];		//this will soon became new buffor
-		memcpy(temp+1, buffor, sizeof (int32_t) * size);	//copying all cells shifted by 1 position
+		int32_t* temp = new int32_t[size + 1];		//this will soon became new buffer
+		memcpy(temp+1, buffer, sizeof (int32_t) * size);	//copying all cells shifted by 1 position
 		temp[0] = value;
-		delete[] buffor;
-		buffor = temp;
+		delete[] buffer;
+		buffer = temp;
 		
 		size++;
 	}
@@ -56,16 +56,16 @@ void Array::pushBack(int32_t value)
 {
 	if (isEmpty())
 	{
-		buffor = new int32_t[1]{ value };
+		buffer = new int32_t[1]{ value };
 		size = 1;
 	}
 	else
 	{
-		int32_t* temp = new int32_t[size + 1];		//this will soon became new buffor
-		memcpy(temp, buffor, sizeof(int32_t) * size);	//copying all cells
+		int32_t* temp = new int32_t[size + 1];		//this will soon became new buffer
+		memcpy(temp, buffer, sizeof(int32_t) * size);	//copying all cells
 		temp[size] = value;
-		delete[] buffor;
-		buffor = temp;
+		delete[] buffer;
+		buffer = temp;
 
 		size++;
 	}
@@ -88,7 +88,7 @@ void Array::printStructure()
 {
 	for (uint32_t i = 0; i < size;i++)
 	{
-		printf("%d \t ", buffor[i]);
+		printf("%d \t ", buffer[i]);
 	}
 
 }

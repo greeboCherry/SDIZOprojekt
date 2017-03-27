@@ -6,7 +6,7 @@ class Array : public IContainer
 {
 private:
 	
-	int32_t* buffor=NULL;
+	int32_t* buffer=NULL;
 	uint32_t size=0;
 public:
 
