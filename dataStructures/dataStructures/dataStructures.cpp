@@ -68,14 +68,15 @@ void test2()
 	for (int i = 0; i < 10; i++)
 	{
 		container->pushRandom(i);
-		//TODO find i as assertion
 	}
 	Array* a = (Array*)container;
-	a->insert(102, 20);
+	a->insert(102, 18);
 	a->printStructure();
-	a->remove(20);
+	a->remove(19);
 			//a->insert(i, i);
 	a->printStructure();
-
+	printf("Found %d at %d\n", 9, a->find(9));
+	printf("Found %d at %d\n", 5, a->find(5));
+	printf("Found %d at %d\n", 13, a->find(13));
 	printf("End of test two, list\n");
 }

@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <algorithm> //copy
 
+
+//TODO Redisign this function to work on smaller amount of branches, just like remove()
 void Array::insert(int32_t value, uint32_t index)
 {
 	if (isEmpty())
@@ -45,12 +47,27 @@ void Array::insert(int32_t value, uint32_t index)
 
 void Array::remove(uint32_t index)
 {
+	if (index >= size)
+	{
+		printf("\n\tERROR: index out of bounds\n");
+		return;
+	}
 	int32_t* temp = new int32_t[size-1];
 	memcpy(temp, buffer, (index)*sizeof(int32_t));
 	memcpy(temp + index, buffer + index + 1, (size - index)*sizeof(int32_t));
 	delete[] buffer;
 	buffer = temp;
 	size--;
+}
+
+int32_t* Array::find(int32_t value)
+{
+	for (uint32_t i = 0; i < size; i++)
+	{
+		if (buffer[i] == value)
+			return &buffer[i];
+	}
+	return NULL;	//what should I return if there is no given value in structure?
 }
 
 void Array::pushFront(int32_t value)
