@@ -104,6 +104,11 @@ void List::pushRandom(int32_t value)
 		pushFront(value);
 }
 
+bool List::findIf(int32_t value)
+{
+	return (find(value) > 0);
+}
+
 void List::erase(Node * position)
 {
 	if (position == _tail)
@@ -132,7 +137,10 @@ void List::erase(uint32_t value)
 void List::popFront()
 {
 	Node* temp = _head->_next;
-	temp->_prev = NULL;
+	if(temp)
+	{
+		temp->_prev = NULL;
+	}
 	delete _head;
 	_head = temp;
 	size--;
@@ -167,7 +175,7 @@ void List::printStructure()
 {
 	Node * it = _head;
 	int counter = 0;
-	printf("Size of this list is \t%i\n", size);
+	printf("Size of this LIST is \t%i\n", size);
 	printf("Head\t\tKey:%d\t_prev:%p\t_next:%p\taddress:%p\n", (_head->key), _head->_prev, _head->_next, _head);
 	do
 	{

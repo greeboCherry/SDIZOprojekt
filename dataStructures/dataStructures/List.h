@@ -50,6 +50,7 @@ public:
 	void pushBack(int32_t value) override;
 	//creates new element inside the list
 	void pushRandom(int32_t value) override;
+	bool findIf(int32_t value) override;
 
 	//removes the node @position
 	void erase(Node * position);

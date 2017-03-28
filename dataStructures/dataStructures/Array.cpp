@@ -70,6 +70,11 @@ int32_t* Array::find(int32_t value)
 	return NULL;	//what should I return if there is no given value in structure?
 }
 
+bool Array::findIf(int32_t value)
+{
+	return (find(value)>0);
+}
+
 void Array::pushFront(int32_t value)
 {
 	if (isEmpty())
@@ -121,8 +126,14 @@ void Array::pushRandom(int32_t value)
 		pushFront(value);
 }
 
+void Array::popFront()
+{
+	remove(0);
+}
+
 void Array::printStructure()
 {
+	printf("Size of this ARRAY is \t%i\n", size);
 	for (uint32_t i = 0; i < size;i++)
 	{
 		printf("%d\t", buffer[i]);

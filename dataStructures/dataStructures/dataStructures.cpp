@@ -4,59 +4,116 @@
 #include "Array.h"
 #include "List.h"
 #include "IContainer.h"
+#include <algorithm>
 
 /*
-Pytania:
-Czy lista mo¿e znaæ swój rozmiar?				ODP mo¿e
-Czy powinienem kiedykolwiek sprawdzac czy w liœcie istnieje tail bez heada?	ODP: po prostu mierz size
+TODO
+	Kopiec					<-doing
+		dodawanie
+		usuwanie
+		wyszukiwanie
 
-How to array?						ODP w sumie to piszê menad¿era do tablic a nie tablice
+	Init danych testowych 
+	Wykonywanie pomiarów
+	wypluwanie pomiarów
 
-
-
+	Procedury testowe
+		Test push/pop front
+		Test push/pop back
+		Test push/pop random
+		Test find
+		
+	Maybe: 
+		mem leaks
+		BST Tree
 */
+//
+void testAndMeasure();
 
-void test1();
+
+
+void testFront();
 void test2();
+void initVariables(int mode);
+
+int32_t* g_numbers;
+IContainer* g_structure;
+uint32_t g_amountOfNumbers = 50;
 
 int main()
 {
+	
 	int i;
-
 	test2();
 	scanf("%d", &i);
     return 0;
 }
 
-void test1()
+void initVariables(int mode)
 {
-	printf("Test one, list \n");
-	List * list = new List;
-	list->pushFront(1);
-	list->pushFront(100);
-	list->pushBack(123);
-	printf("100, 1, 123\n");
-	list->printStructure();
-	list->insert((uint32_t)0, 13);
-	list->erase(123);
-	printf("13, 100, 1\n");
-	list->printStructure();
 	
-	list->insert((uint32_t)0, 26);
-	list->insert(1, 39);
-	list->insert(3, 666);
+	uint32_t maxValue=100;
+	uint32_t minValue=10;
+	switch (mode%3)
+	{
+	case 1:
+		{
+			g_amountOfNumbers = 50;
+			maxValue = 100;
+			minValue = 10;
+			break;
+		}
+		
+	case 2:
+		{
+			g_amountOfNumbers = 100000;
+			break;
+		}
+	case 0: //nie puszczaæ za dnia!
+		{
+			g_amountOfNumbers = 50000000;
+			maxValue = 100;
+			minValue = 10;
+			break;
+		}
+		
+	}
+
+	g_numbers = new int32_t[g_amountOfNumbers];
+	for (uint32_t i = 0; i < g_amountOfNumbers;i++)
+	{
+		g_numbers[i] = rand() % maxValue + minValue;		// 4294967296 - 2147483648;
+	}
 	
-	printf("26, 39, 13, 666, 100, 1\n");
-	list->printStructure();
-	/*
-	list->pushBack(487);
-	list->erase(13);
-	//	Node* temp = list->insert(1, 256);
-	list->printStructure();
-	//	list->erase(temp);
-	//	list->printStructure();
-	*/
-	printf("End of test one, list\n");
+
+}
+
+void testAndMeasure()
+{
+	initVariables(2);
+	g_structure = new Array;
+	//test1();
+	delete	g_structure;
+	g_structure = new List;
+	testFront();
+}
+
+void testFront()
+{
+	printf("Test one \n");
+	for (uint32_t i = 0; i < g_amountOfNumbers;i++)
+	{
+		g_structure->pushFront(g_numbers[i]);
+
+	}
+	g_structure->printStructure();
+	for (uint32_t i = 0; i < g_amountOfNumbers; i++)
+	{
+		g_structure->popFront();
+
+	}
+	g_structure->printStructure();
+	printf("End of test one \n");
 }
 
 //I could add srand to alert order, but why?
@@ -75,8 +132,8 @@ void test2()
 	a->remove(19);
 			//a->insert(i, i);
 	a->printStructure();
-	printf("Found %d at %d\n", 9, a->find(9));
-	printf("Found %d at %d\n", 5, a->find(5));
-	printf("Found %d at %d\n", 13, a->find(13));
+	printf("Found %d at %p\n", 9, a->find(9));
+	printf("Found %d at %p\n", 5, a->find(5));
+	printf("Found %d at %p\n", 13, a->find(13));
 	printf("End of test two, list\n");
 }

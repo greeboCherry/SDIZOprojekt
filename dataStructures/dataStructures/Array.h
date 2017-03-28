@@ -14,9 +14,12 @@ public:
 	 void remove(uint32_t index);
 	 //returns pointer to first occurrence of @value in table or NULL if it's not found
 	 int32_t* find(int32_t value);// override;
+	 bool findIf(int32_t value) override;
 	 void pushFront(int32_t value) override;
 	 void pushBack(int32_t value) override;
 	 void pushRandom(int32_t value) override;
+
+	 void popFront() override;
 
 	 void printStructure() override;
 
