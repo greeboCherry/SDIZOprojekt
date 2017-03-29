@@ -19,8 +19,12 @@ TODO
 		wyszukiwanie		done
 
 	Init danych testowych	<-doing
+
+		http://cpp0x.pl/forum/temat/?id=21331
 	Wykonywanie pomiarów
 	wypluwanie pomiarów
+
+
 
 	Procedury testowe		ALL DONE except for heap(just one push and pop, search is... working)
 		Test push/pop front
@@ -32,12 +36,14 @@ TODO
 		mem leaks?	
 		BST Tree
 */
-//
+
+//run this to get all results in txt NYI
 void testAndMeasure();
 
 
 
-void testFront();
+void testFrontBack();	//push front and pop back the struct
+void testBackFront();
 void test2();
 void testHeap();
 void initVariables(int mode);
@@ -57,32 +63,52 @@ int main()
 
 void initVariables(int mode)
 {
-	
+	g_amountOfNumbers = 50;
 	uint32_t maxValue=100;
 	uint32_t minValue=10;
-	switch (mode%3)
+	if (mode)
 	{
-	case 1:
+		switch (mode % 3)
+		{
+		case 1:
 		{
 			g_amountOfNumbers = 50;
-			maxValue = 100;
-			minValue = 10;
+
 			break;
 		}
-		
-	case 2:
+
+		case 2:
 		{
 			g_amountOfNumbers = 100000;
 			break;
 		}
-	case 0: //nie puszczaæ za dnia!
+		case 0:
 		{
-			g_amountOfNumbers = 50000000;
-			maxValue = 100;
-			minValue = 10;
+			g_amountOfNumbers = 200000;
+
 			break;
 		}
-		
+
+		}
+		switch (mode / 3)
+		{
+		case 1:
+		{
+			minValue = 10;
+			maxValue = 100;
+			break;
+		}
+		case 2:
+		{
+			minValue = -2147483648/2;
+			maxValue = 2147483647/2;
+			break;
+		}
+		case 3:
+			minValue = -2147483648;
+			maxValue = 2147483647;
+			break;
+		}
 	}
 
 	g_numbers = new int32_t[g_amountOfNumbers];

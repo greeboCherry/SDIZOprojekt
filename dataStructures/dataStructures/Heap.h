@@ -23,10 +23,9 @@ public:
 	void heapifyUp(uint32_t index);
 	//make swaps downward until heap is fixed, recursive 
 	void heapifyDown(uint32_t index);
-	//not working, not likely to be working
 	
-
-	void pushBack(int32_t value) override; //dodaje element do kopca i ustawia go na wlasciwym miejscu
+	//inserts @value as last element and restores the heap if needed
+	void pushBack(int32_t value) override; 
 	//removes first element and restores the heap (if needed)
 	void popFront() override;
 	//returns @value index, returns -1 if not found
@@ -39,7 +38,7 @@ public:
 
 	[[deprecated("not working, not sure if should be working")]]
 	void insert(int32_t value, uint32_t index);
-	//inserts @value as last element and restores the heap if needed
+	//not working, not likely to be working
 	virtual void pushRandom(int32_t value) override;
 	virtual void pushFront(int32_t value) override;
 	virtual void popRandom() override;
