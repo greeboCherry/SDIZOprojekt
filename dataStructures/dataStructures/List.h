@@ -68,5 +68,8 @@ public:
 	void printStructure();
 	//tells if the list is empty
 	bool isEmpty() { return size==0; }
+
+	virtual void popRandom() override;
+
 };
 

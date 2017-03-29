@@ -24,4 +24,9 @@ public:
 	 void printStructure() override;
 
 	 bool isEmpty() { return size==0; }
+
+	 virtual void popRandom() override;
+
+	 virtual void popBack() override;
+
 };

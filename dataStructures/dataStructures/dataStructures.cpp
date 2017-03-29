@@ -10,26 +10,26 @@
 /*
 Pytania:
 	1. Czy nie³adnie jest ukrywaæ nag³ówek z typem w nag³ówku interfejsu?
-	2. Czy mój interfejs jest z³y?(drzewiaste nie maj¹ inserta itd., find w liœcie nie wyszed³)
+	2. Czy mój interfejs jest z³y?(drzewiaste nie maj¹ inserta itd., find w liœcie nie wyszed³ jak chcia³em)
 
 TODO
-	Kopiec					<-doing
-		dodawanie
-		usuwanie
-		wyszukiwanie
+	Kopiec					DONE
+		dodawanie			done	
+		usuwanie			done
+		wyszukiwanie		done
 
-	Init danych testowych 
+	Init danych testowych	<-doing
 	Wykonywanie pomiarów
 	wypluwanie pomiarów
 
-	Procedury testowe
+	Procedury testowe		ALL DONE except for heap(just one push and pop, search is... working)
 		Test push/pop front
 		Test push/pop back
 		Test push/pop random
 		Test find
 		
 	Maybe: 
-		mem leaks?
+		mem leaks?	
 		BST Tree
 */
 //

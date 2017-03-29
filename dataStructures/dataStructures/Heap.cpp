@@ -90,6 +90,11 @@ void Heap::insert(int32_t value, uint32_t index)
 	
 }
 
+
+
+
+
+
 bool Heap::isLeaf(uint32_t index)
 {
 	return getLeftChildIndex(index) > size;
@@ -142,20 +147,21 @@ void Heap::popFront()
 	}
 }
 
-uint32_t Heap::find(int32_t val)
+int32_t Heap::find(int32_t value)
 {
-	if (buffer[0] >= val)
-		for (uint32_t i = 0; i < size; i++)
+	if (buffer[0] >= value)
+		for (int32_t i = 0; i < size; i++)
 		{
-			if (buffer[i] == val)
+			if (buffer[i] == value)
 				return i;
 		}
 	return -1;
 }
 
-//https://en.wikipedia.org/wiki/Binary_heap
-
-
+bool Heap::findIf(int32_t value)
+{
+	return find(value) > 0;
+}
 
 //shamelessly stolen from 
 //http://eduinf.waw.pl/inf/alg/001_search/0113.php
@@ -168,7 +174,7 @@ void Heap::print(std::string sp, std::string sn, int k)
 	cr[0] = 218; cr[1] = 196;
 	cl[0] = 192; cl[1] = 196;
 	cp[0] = 179;
-//	printf("Heap size is %d\n", size); //move to pritn structure
+	
 if(size)
 	if (k < size)
 	{
@@ -184,5 +190,30 @@ if(size)
 		if (sn == cl) s[s.length() - 2] = ' ';
 		print(s + cp, cl, 2 * k + 1);
 	}
-		
+}
+
+void Heap::printStructure()
+{
+	printf("Heap size is %d\n", size); 
+	print();
+}
+
+void Heap::popRandom()
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Heap::popBack()
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Heap::pushRandom(int32_t value)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+void Heap::pushFront(int32_t value)
+{
+	throw std::logic_error("The method or operation is not implemented.");
 }

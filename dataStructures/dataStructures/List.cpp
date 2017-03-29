@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include <cstdlib>
-
+#include <stdexcept>
 void List::insert(uint32_t position, int32_t value)
 {
 	if (position == 0)
@@ -183,4 +183,23 @@ void List::printStructure()
 		counter++;
 	} while (it = it->getNext());
 	printf("Tail\t\tKey:%d\t_prev:%p\t_next:%p\taddress:%p\n", (_tail->key), _tail->_prev, _tail->_next, _tail);
+}
+
+void List::popRandom()
+{
+	if (isEmpty())
+		return;
+	Node * it = _head;
+	for (uint32_t i = rand() % size; i > 0;i--)
+	{
+		it = it->getNext();
+	}
+	if (it)
+	{
+		erase(it);
+	}
+	else
+	{
+		throw std::out_of_range("popRandom is wrong again");
+	}
 }

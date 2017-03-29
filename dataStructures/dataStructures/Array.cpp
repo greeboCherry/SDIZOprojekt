@@ -1,5 +1,5 @@
 #include "Array.h"
-
+#include <stdexcept>
 #include <algorithm> //memcpy
 
 
@@ -48,8 +48,8 @@ void Array::remove(uint32_t index)
 {
 	if (index >= size)
 	{
-		printf("\n\tERROR: index out of bounds\n");
-		return;
+		throw std::out_of_range("The method or operation is not implemented.");
+		
 	}
 	int32_t* temp = new int32_t[size-1];
 	memcpy(temp, buffer, (index)*sizeof(int32_t));
@@ -139,4 +139,19 @@ void Array::printStructure()
 
 	}
 	printf("\n");
+}
+
+void Array::popRandom()
+{
+		if (size)
+		{
+			remove(rand() % size);
+		}
+		else
+			popFront();
+}
+
+void Array::popBack()
+{
+	remove(size);
 }
