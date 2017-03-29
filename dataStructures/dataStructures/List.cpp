@@ -176,13 +176,16 @@ void List::printStructure()
 	Node * it = _head;
 	int counter = 0;
 	printf("Size of this LIST is \t%i\n", size);
-	printf("Head\t\tKey:%d\t_prev:%p\t_next:%p\taddress:%p\n", (_head->key), _head->_prev, _head->_next, _head);
-	do
+	if (size)
 	{
-		printf("Node no. %d\tKey:%d\t_prev:%p\t_next:%p\taddress:%p\n", counter, (it->key), it->_prev, it->_next, it);
-		counter++;
-	} while (it = it->getNext());
-	printf("Tail\t\tKey:%d\t_prev:%p\t_next:%p\taddress:%p\n", (_tail->key), _tail->_prev, _tail->_next, _tail);
+		printf("Head\t\tKey:%d\t_prev:%p\t_next:%p\taddress:%p\n", (_head->key), _head->_prev, _head->_next, _head);
+		do
+		{
+			printf("Node no. %d\tKey:%d\t_prev:%p\t_next:%p\taddress:%p\n", counter, (it->key), it->_prev, it->_next, it);
+			counter++;
+		} while (it = it->getNext());
+		printf("Tail\t\tKey:%d\t_prev:%p\t_next:%p\taddress:%p\n", (_tail->key), _tail->_prev, _tail->_next, _tail);
+	}
 }
 
 void List::popRandom()
