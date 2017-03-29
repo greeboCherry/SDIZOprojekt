@@ -3,10 +3,15 @@
 #include <stdio.h>
 #include "Array.h"
 #include "List.h"
+#include "Heap.h"
 #include "IContainer.h"
 #include <algorithm>
 
 /*
+Pytania:
+	1. Czy nie³adnie jest ukrywaæ nag³ówek z typem w nag³ówku interfejsu?
+	2. Czy mój interfejs jest z³y?(drzewiaste nie maj¹ inserta itd., find w liœcie nie wyszed³)
+
 TODO
 	Kopiec					<-doing
 		dodawanie
@@ -24,7 +29,7 @@ TODO
 		Test find
 		
 	Maybe: 
-		mem leaks
+		mem leaks?
 		BST Tree
 */
 //
@@ -34,6 +39,7 @@ void testAndMeasure();
 
 void testFront();
 void test2();
+void testHeap();
 void initVariables(int mode);
 
 int32_t* g_numbers;
@@ -44,8 +50,8 @@ int main()
 {
 	
 	int i;
-	test2();
-	scanf("%d", &i);
+	testHeap();
+	scanf_s("%d", &i);
     return 0;
 }
 
@@ -137,3 +143,17 @@ void test2()
 	printf("Found %d at %p\n", 13, a->find(13));
 	printf("End of test two, list\n");
 }
+
+
+
+void testHeap()
+{
+	Heap* h = new Heap;
+	for (uint32_t i = 0; i < 31; i++)
+		h->pushBack(rand()%1000);
+	h->print();
+	for (uint32_t i = 0; i < 31; i++)
+		h->popFront();
+	h->print();
+}
+

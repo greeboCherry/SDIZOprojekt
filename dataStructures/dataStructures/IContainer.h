@@ -2,11 +2,7 @@
 
 #include <stdint.h> //int32_t
 /*
-Interface made to make tests easier, reqs:
-
-*pushFront
-*pushBack
-*pushRandom
+Interface made to make tests easier
 */
 
 class IContainer

@@ -1,7 +1,6 @@
 #include "Array.h"
 
-#include <stdio.h>
-#include <algorithm> //copy
+#include <algorithm> //memcpy
 
 
 //TODO Redisign this function to work on smaller amount of branches, just like remove()

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IContainer.h"
+#include "IContainer.h" //contains int types h, is it dirty?
 
 class Array : public IContainer
 {
