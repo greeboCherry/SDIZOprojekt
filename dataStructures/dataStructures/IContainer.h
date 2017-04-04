@@ -8,6 +8,9 @@ Interface made to make tests easier
 class IContainer
 {
 public:
+
+	IContainer(IContainer&) {};
+	IContainer() {};
 	virtual void pushFront(int32_t value) = 0;
 	virtual void pushBack(int32_t value) = 0;
 	virtual void pushRandom(int32_t value) = 0;

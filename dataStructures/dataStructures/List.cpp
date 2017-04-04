@@ -3,6 +3,12 @@
 #include <stdio.h>
 #include <cstdlib>
 #include <stdexcept>
+
+List::List(List& gold)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
 void List::insert(uint32_t position, int32_t value)
 {
 	if (position == 0)
@@ -134,6 +140,21 @@ void List::erase(uint32_t value)
 	erase(find(value));
 }
 
+void List::clear()
+{
+	List::Node* temp = _head;
+	List::Node* node = _head;
+	while (node)
+	{
+		temp = node;
+		node = node->_next;
+		delete temp;
+		
+	} 
+	_head = _tail = nullptr;
+	size = 0;
+}
+
 void List::popFront()
 {
 	Node* temp = _head->_next;
@@ -206,3 +227,5 @@ void List::popRandom()
 		throw std::out_of_range("popRandom is wrong again");
 	}
 }
+
+

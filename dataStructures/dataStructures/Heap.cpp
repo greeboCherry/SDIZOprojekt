@@ -160,7 +160,13 @@ int32_t Heap::find(int32_t value)
 
 bool Heap::findIf(int32_t value)
 {
-	return find(value) > 0;
+	return find(value) >= 0;
+}
+
+void Heap::clear()
+{
+	delete[] buffer;
+	size = 0;
 }
 
 //shamelessly stolen from 
@@ -197,6 +203,8 @@ void Heap::printStructure()
 	printf("Heap size is %d\n", size); 
 	print();
 }
+
+
 
 void Heap::popRandom()
 {

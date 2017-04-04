@@ -146,12 +146,15 @@
     <ClInclude Include="Heap.h" />
     <ClInclude Include="IContainer.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="TestUnit.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Array.cpp" />
     <ClCompile Include="dataStructures.cpp" />
     <ClCompile Include="Heap.cpp" />
     <ClCompile Include="List.cpp" />
+    <ClCompile Include="FileWriter.cpp" />
+    <ClCompile Include="TestUnit.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

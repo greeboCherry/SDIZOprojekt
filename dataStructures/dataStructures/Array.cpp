@@ -3,6 +3,34 @@
 #include <algorithm> //memcpy
 
 
+Array::Array()
+{
+
+}
+
+Array::Array(Array& gold) : IContainer(gold)
+{
+	size = gold.size;
+	buffer = new int32_t[size];
+	memcpy(buffer, gold.buffer, size* sizeof int32_t);
+
+}
+
+
+
+Array::~Array()
+{
+	clear();
+}
+
+void Array::initFromArray(int32_t newData[], uint32_t newSize)
+{
+	size = newSize;
+	buffer = new int32_t[size];
+	memcpy(buffer, newData, size* sizeof int32_t);
+
+}
+
 //TODO Redisign this function to work on smaller amount of branches, just like remove()
 void Array::insert(int32_t value, uint32_t index)
 {
@@ -59,6 +87,13 @@ void Array::remove(uint32_t index)
 	size--;
 }
 
+void Array::clear()
+{
+	
+	delete[] buffer;
+	size = 0;
+}
+
 int32_t* Array::find(int32_t value)
 {
 	for (uint32_t i = 0; i < size; i++)
@@ -67,6 +102,11 @@ int32_t* Array::find(int32_t value)
 			return &buffer[i];
 	}
 	return NULL;	//what should I return if there is no given value in structure?
+}
+
+uint32_t Array::getSize()
+{
+	return size;
 }
 
 bool Array::findIf(int32_t value)
@@ -155,3 +195,4 @@ void Array::popBack()
 {
 	remove(size);
 }
+

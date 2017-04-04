@@ -1,0 +1,98 @@
+Front	 insert(with init and deletion) to	 1000	elements:	6.535986	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 1000	elements:	6.327950	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 1000	elements:	6.221365	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 1000	elements:	3.966120	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 2000	elements:	6.584147	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 2000	elements:	9.653775	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 2000	elements:	6.549408	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 2000	elements:	6.768103	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 3000	elements:	7.180624	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 3000	elements:	7.110357	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 3000	elements:	6.659150	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 3000	elements:	4.481673	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 4000	elements:	7.194835	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 4000	elements:	7.109963	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 4000	elements:	7.052723	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 4000	elements:	4.360088	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 5000	elements:	7.937373	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 5000	elements:	7.485771	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 5000	elements:	11.334649	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 5000	elements:	4.594178	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 6000	elements:	8.094486	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 6000	elements:	7.948426	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 6000	elements:	8.304496	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 6000	elements:	4.894588	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 7000	elements:	9.207700	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 7000	elements:	8.612407	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 7000	elements:	8.904132	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 7000	elements:	5.218683	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 8000	elements:	9.376261	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 8000	elements:	8.870972	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 8000	elements:	9.065982	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 8000	elements:	5.291713	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 9000	elements:	9.458370	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 9000	elements:	9.904050	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 9000	elements:	9.421263	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 9000	elements:	5.929245	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 10000	elements:	10.440525	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 10000	elements:	9.823125	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 10000	elements:	9.774570	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 10000	elements:	5.961615	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 11000	elements:	15.778030	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 11000	elements:	11.143981	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 11000	elements:	11.120296	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 11000	elements:	7.114305	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 12000	elements:	13.256719	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 12000	elements:	10.837255	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 12000	elements:	10.783568	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 12000	elements:	6.312554	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 13000	elements:	10.991605	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 13000	elements:	11.416758	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 13000	elements:	11.488999	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 13000	elements:	6.519801	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------
+Front	 insert(with init and deletion) to	 14000	elements:	12.244563	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Mid	 insert(with init and deletion) to	 14000	elements:	12.153769	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Back	 insert(with init and deletion) to	 14000	elements:	12.189692	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+Raw init and deletion to				 14000	elements:	6.774025	ms	Test parameters: max value 2147483647 ,min value -2147483648 ,insert value1	
+
+Tested 500 times
+------------------------

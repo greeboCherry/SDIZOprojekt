@@ -27,6 +27,9 @@
     <ClInclude Include="Heap.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dataStructures.cpp">
@@ -39,6 +42,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Heap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUnit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

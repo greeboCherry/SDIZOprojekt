@@ -11,7 +11,14 @@ private:
 	uint32_t size=0; 
 
 public:
-	
+	~Heap() { clear(); }
+	Heap() {}
+	Heap(Heap& gold)
+	{
+		size = gold.size;
+		buffer = new int32_t[size];
+		memcpy(buffer, gold.buffer, size* sizeof int32_t);
+	}
 	uint32_t getSize(); 
 	//checks if node of given @index is leaf
 	bool isLeaf(uint32_t index);
@@ -33,6 +40,7 @@ public:
 	int32_t find(int32_t value); 
 	bool findIf(int32_t value) override;
 						
+	void clear();
 
 	void print(std::string sp = "", std::string sn = "", int k = 0);
 
@@ -44,6 +52,8 @@ public:
 	virtual void popRandom() override;
 	virtual void popBack() override;
 	virtual void printStructure() override;
+
+	
 };
 
 

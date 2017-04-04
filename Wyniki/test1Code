@@ -1,0 +1,90 @@
+void TestUnit::testInsertArray(int runLenght)
+{
+	double frontInsertTime,
+		midInsertTime,
+		backInsertTime;
+	std::string frontInsertString, midInsertString, backInsertString;
+
+
+	minValue = -2147483648 / 2;
+	maxValue = 2147483647 / 2;
+
+
+	const int amountOfStructures=256;
+	Array* gold = new Array();
+
+	gold->initFromArray(numbers, amountOfNumbers);
+	//gold->printStructure();
+
+	int32_t insertLocation = amountOfNumbers / 2;	//at what point we insert that number
+	int32_t insertValue = 1;
+	Array* structures[amountOfStructures];
+
+	//cheat init array so then we can delete it before first iteration
+	for (int i = 0; i < amountOfStructures; i++)
+	{
+		structures[i] = new Array(*gold);
+	}
+
+	//iterate through operations on bigger and bigger array
+	for (int testCount = 0; testCount < runLenght; testCount++)
+	{
+			frontInsertTime=midInsertTime=backInsertTime=0;
+
+			for (int i = 0; i < amountOfStructures; i++)
+			{
+				
+				delete structures[i];
+				structures[i] = new Array(*gold);
+			}
+			StartCounter();
+			for (int i = 0; i < amountOfStructures; i++)
+			{
+				structures[i]->pushFront(insertValue);
+			}
+		frontInsertTime = GetCounter() / amountOfStructures;
+		frontInsertString = "Front\t insert to " + std::to_string(structures[0]->getSize()) + " elements:\t" +  std::to_string(frontInsertTime)+"\tms\n";
+			
+			for (int i = 0; i < amountOfStructures; i++)
+			{
+				delete structures[i];
+				structures[i] = new Array(*gold);
+			}
+			StartCounter();
+			for (int i = 0; i < amountOfStructures; i++)
+			{
+			
+				structures[i]->insert(insertValue,insertLocation);
+			}
+		midInsertTime = GetCounter() / amountOfStructures;
+		midInsertString = "Mid\t insert to " + std::to_string(structures[0]->getSize()) + " elements:\t" + std::to_string(midInsertTime) + "\tms\n";
+
+			for (int i = 0; i < amountOfStructures; i++)
+			{
+				delete structures[i];
+				structures[i] = new Array(*gold);
+			}
+			StartCounter();
+			for (int i = 0; i < amountOfStructures; i++)
+			{
+				structures[i]->pushBack(insertValue);
+			}
+		backInsertTime = GetCounter() / amountOfStructures;
+		backInsertString = "Back\t insert to " + std::to_string(structures[0]->getSize()) + " elements:\t" + std::to_string(backInsertTime) + "\tms\n";
+
+
+
+	//	std::time_t currentTime = std::time(NULL);
+	//	std::string filename(std::asctime(std::localtime(&currentTime)));
+		FileWriter::saveToFile("ArrayResults", frontInsertString);
+		FileWriter::saveToFile("ArrayResults", midInsertString);
+		FileWriter::saveToFile("ArrayResults", backInsertString);
+
+		gold->pushRandom(testCount);
+	}
+	for (int i = 0; i < amountOfStructures; i++)
+	{
+		delete structures[i];
+	}
+	delete gold;
+}

@@ -1,10 +1,12 @@
-// dataStructures.cpp : Defines the entry point for the console application.
-//
+
 #include <stdio.h>
 #include "Array.h"
 #include "List.h"
 #include "Heap.h"
 #include "IContainer.h"
+//#include "FileWriter.cpp"
+#include "TestUnit.h"
+#include <string>
 #include <algorithm>
 #include <windows.h>
 
@@ -40,7 +42,7 @@ TODO
 		Test find
 		
 	Maybe: 
-		mem leaks?	
+		mem leaks	-none found
 		BST Tree
 */
 
@@ -48,7 +50,7 @@ TODO
 void testAndMeasure();
 void testAndShow();
 
-void initVariables(int mode);
+[[deprecated("Use TestUnit")]]void initVariables(int mode);
 void testPushFront();	//no heap
 void testPushBack();
 void testPushRandom();	//no heap
@@ -64,8 +66,7 @@ void test2();
 void StartCounter();
 double GetCounter();
 
-double PCFreq = 0.0;
-__int64 CounterStart = 0;
+
 int32_t* g_numbers;
 IContainer* g_structure;
 uint32_t g_amountOfNumbers = 50;
@@ -75,8 +76,29 @@ int32_t g_minValue = 10;
 int main()
 {
 	
+	//	FileWriter::saveToFile("hello.txt", "hello world?\n");	//test of save to file
+	TestUnit* ts = new TestUnit();
+//	ts->initVariables(2);
+	
+	
+	ts->initVariables(8);
+	//ts->testInsertArray(100000, 50000);
+	for (int i = 1000; i < 50000; i+=1000)
+	{
+		ts->testSearch(i, 500);
+	//		ts->testHeap(i, 500);
+	//	ts->testInsertList(i , 500);	//there is no time
+	//	ts->testInsertArray(i, 500);
+		printf("Finished run on %d elements\n", i);
+	}
+	
+
+
+//	Array* a = new Array;
+//	a->initFromArray(ts->numbers, ts->amountOfNumbers);
+//	a->printStructure();
 	int i;
-	testAndShow();
+	//testAndShow();
 	printf("Give any integer to continue:\t");
 	scanf_s("%d", &i);
     return 0;
@@ -153,27 +175,23 @@ void testAndMeasure()
 
 void testAndShow()
 {
-	double time;
+	
 
 	
 	initVariables(2);			//put it to 1 for smaller sample
 	g_structure = new Heap;		//replace it with another struct
-	StartCounter();
+	
 	testPushBack();
-	time = GetCounter();
+	
 	g_structure->printStructure();
-	printf("PushFront for %d numbers in range \t [%d ; %d] done in \t%f ms \n", g_amountOfNumbers, g_minValue, g_maxValue, time);
-
-	StartCounter();
+	
+	
 	testFindTrue();
-	time = GetCounter();
-	printf("FindTrue for %d numbers in range \t [%d ; %d] done in \t%f ms \n", g_amountOfNumbers, g_minValue, g_maxValue, time);
-
-	StartCounter();
+	
+	
 	testPopFront();
-	time = GetCounter();
+	
 	g_structure->printStructure();
-	printf("PopFront for %d numbers in range \t [%d ; %d] done in \t%f ms \n", g_amountOfNumbers, g_minValue, g_maxValue, time);
 
 }
 
@@ -258,20 +276,3 @@ void testHeap()
 	h->print();
 }
 
-void StartCounter()
-{
-	LARGE_INTEGER li;
-	if (!QueryPerformanceFrequency(&li))
-		printf( "QueryPerformanceFrequency failed!\n");
-
-	PCFreq = double(li.QuadPart) / 1000.0;
-
-	QueryPerformanceCounter(&li);
-	CounterStart = li.QuadPart;
-}
-double GetCounter()
-{
-	LARGE_INTEGER li;
-	QueryPerformanceCounter(&li);
-	return double(li.QuadPart - CounterStart) / PCFreq;
-}

@@ -33,6 +33,7 @@ private:
 				key = newKey;
 			}
 
+			
 		};
 
 	Node * _head = NULL;	//pointer to the first node
@@ -40,6 +41,9 @@ private:
 	uint32_t size=0;	
 public:
 
+	List() {};
+	List(List& gold);
+	~List() { clear(); }
 	//creates new element at front of @position	
 	void insert(uint32_t position, int32_t value);
 	//creates new element at front of @position
@@ -56,6 +60,9 @@ public:
 	void erase(Node * position);
 	//removes the firs node of given value
 	void erase(uint32_t value);
+	
+	void clear();
+
 	//removes the head
 	void popFront();
 	//removes the tail
@@ -68,8 +75,10 @@ public:
 	void printStructure();
 	//tells if the list is empty
 	bool isEmpty() { return size==0; }
+	uint32_t getSize() { return size; }
 
 	virtual void popRandom() override;
 
+	
 };
 
