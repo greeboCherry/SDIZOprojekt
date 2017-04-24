@@ -1,23 +1,37 @@
 #pragma once
-#include <stdint.h>
+#include "IGraph.h"
 #include <iostream>
 /*
 represents graph by matrix of edges between verticles
 
 */
-template <size_t amountOfVerticies>
-class graphByMatrix 
+class graphByMatrix : public IGraph
 {
-	using maxEdgeValue = int16_t;		//determines how much memory should those damn wages take of my memory
+			//determines how much memory should those damn wages take of my memory
+
 private:
-	size_t amountOfEdges;
-	maxEdgeValue edges[amountOfVerticies][amountOfVerticies];
+	uint32_t amountOfVerticies;
+	uint32_t amountOfEdges=0;
+	maxEdgeValue* edges;
+	bool directional;
+	
 public:
-	size_t getNumVerticies() const { return amountOfVerticies; }
-	graphByMatrix() { 	memset(edges, 0, sizeof(edges));	}	//zero all edges so we know it's empty
+	uint32_t getNumVerticies() const { return amountOfVerticies; }
+	graphByMatrix(uint32_t verts, bool directional=false);
 	void printMatrix();	//print NxN rows representing edges
-	void addEdge(size_t v1, size_t v2, bool directional=false);		
-	void addEdge(size_t v1, size_t v2, maxEdgeValue wage);
+	/*
+		@fromV - starting vertex
+		@toV - ending vertex
+		@wage - wage/cost/whatever of traversing from one to another
+		@directional - if true, starting to ending edge is marked
+	*/
+	void addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage=1);
+
+
+
+
+	// Inherited via IGraph
+	virtual uint32_t GetPaths(uint32_t node, Path* results) override;
 
 };
 
