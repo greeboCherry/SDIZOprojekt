@@ -2,6 +2,7 @@
 //
 //#include "stdafx.h"
 #include "graphByMatrix.h"
+#include "TestUnit.h"
 
 /*
 	Pytania:
@@ -18,11 +19,20 @@
 
 int main()
 {
-	graphByMatrix  *G = new graphByMatrix(10);
+	TestUnit testUnit;
+	testUnit.testG1Load();
 
-	std::cout << "\nthat's it, thank you\n";
-	G->addEdge(2,3,5);
+	graphByMatrix  *G = new graphByMatrix(10);
+	std::map<uint32_t, maxEdgeValue> paths;
+
+	G->loadGraphFromFile("input/G1.txt");
 	G->printMatrix();
+	G->GetPaths(0, paths);
+	for (auto it = paths.begin(); it != paths.end(); it++)
+	{
+		std::cout << "Vertex: " << it->second << "\t" << "Wage:" << it->first << std::endl;
+	}
+
 	std::cin >> new char();		//patent by in¿. Piotr Masek
     return 0;
 }

@@ -10,9 +10,8 @@ class graphByMatrix : public IGraph
 			//determines how much memory should those damn wages take of my memory
 
 private:
-	uint32_t amountOfVerticies;
-	uint32_t amountOfEdges=0;
-	maxEdgeValue* edges;
+	
+	maxEdgeValue* edges;//dynamic array representing edges in FROM\TO fashion, @seealso addEdge
 	bool directional;
 	
 public:
@@ -23,15 +22,12 @@ public:
 		@fromV - starting vertex
 		@toV - ending vertex
 		@wage - wage/cost/whatever of traversing from one to another
-		@directional - if true, starting to ending edge is marked
+		@directional - if true, only starting to ending edge is marked
 	*/
-	void addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage=1);
-
-
-
+	virtual void addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage=1) override;
 
 	// Inherited via IGraph
-	virtual uint32_t GetPaths(uint32_t node, Path* results) override;
+	virtual void GetPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue>& neighbours) override;
 
 };
 
