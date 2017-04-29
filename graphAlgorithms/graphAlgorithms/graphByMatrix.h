@@ -27,7 +27,7 @@ public:
 	virtual void addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage=1) override;
 
 	// Inherited via IGraph
-	virtual void GetPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue>& neighbours) override;
+	virtual void GetPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &neighbours) override;
 
 };
 

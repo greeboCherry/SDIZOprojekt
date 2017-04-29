@@ -1,14 +1,11 @@
 #pragma once
 #include <stdint.h>
 #include <map>
+#include <list>
 using maxEdgeValue = int16_t;
 
-//structure representing path or edge. other functions should know where it comes from.
-struct Path
-{
-	uint32_t wage;	//wage index
-	uint32_t	origin, destination; //inde xcal
-};
+//using edge = std::pair<uint32_t, maxEdgeValue>;//represents edge by target vertex index and edge wage
+
 
 
 class IGraph
@@ -28,6 +25,12 @@ public:
 	each following line:	fromVertex toVertex wage
 	*/
 	bool loadGraphFromFile(std::string path);
+
+	std::list<uint32_t> AStar(uint32_t startIndex, uint32_t targetIndex);
+
+	//helper function for A*, not sure what exactly is correct here, gonna try http://www.cc.gatech.edu/~echow/pubs/levdiff-aaai.pdf
+	maxEdgeValue getHeuristic(uint32_t vertexIndex);
+
 	IGraph();
 	~IGraph();
 };

@@ -39,10 +39,10 @@ void graphByMatrix::addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage/*=1*
 		edges[fromV*amountOfVerticies + toV] = wage;
 }
 
-void graphByMatrix::GetPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue>& neighbours)
+void graphByMatrix::GetPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &neighbours)
 {
 	neighbours.clear();
-	const uint32_t row = vertex*amountOfVerticies;	//we don't want to multiply it every time loop goes by
+	const uint32_t row = vertex*amountOfVerticies;	//we don't want to multiply it every time loop goes by, right?
 	for (uint32_t i = 0; i < amountOfVerticies; i++)
 	{
 		if (edges[row + i] > 0)
