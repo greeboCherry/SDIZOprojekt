@@ -85,11 +85,11 @@ std::list<uint32_t> IGraph::AStar(uint32_t startIndex, uint32_t targetIndex)
 			itc = open.find(n.first);
 			if (itc == open.end())	//If the node is not in the closed list and the open list, set its parent to the current node and calculate its G and F value.
 			{
-				open.emplace(currentIndex, VertexValue(closed.at(currentIndex).G, getHeuristic(n.first), currentIndex));
+				open.emplace(n.first, VertexValue(closed.at(currentIndex).G, getHeuristic(n.first), currentIndex));
 			}
 			else//If the node is not in the closed list but is in the open list, whether the path between it and the current node is quicker than its current path.
 			{
-				uint32_t n_g = n.second + closed.at(currentIndex).G;	//G of currently evaluated neighbor 
+				uint32_t n_g = n.second + closed.at(currentIndex).G;	//G of currently neighbor currently evaluated  
 				if (itc->second.G > n_g)
 					{
 					 		itc->second.G = n_g;
