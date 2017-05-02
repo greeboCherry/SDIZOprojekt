@@ -12,8 +12,9 @@
 
 	Refki:
 	https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
-	https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm
 
+	https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm
+	https://en.wikipedia.org/wiki/Prim%27s_algorithm
 
 	https://en.wikipedia.org/wiki/A*_search_algorithm
 	http://www.cc.gatech.edu/~echow/pubs/levdiff-aaai.pdf	A* herusitics with center concepts
@@ -26,16 +27,16 @@ int main()
 	testUnit.testG1Load();
 	testUnit.testG1AStar();
 
-	graphByMatrix  *G = new graphByMatrix(10);
-	std::map<uint32_t, maxEdgeValue> paths;
-
-	G->loadGraphFromFile("input/G1.txt");
-	G->printMatrix();
-	G->GetPaths(0, paths);
-	for (auto it = paths.begin(); it != paths.end(); it++)
-	{
-		std::cout << "Vertex: " << it->second << "\t" << "Wage:" << it->first << std::endl;
-	}
+// 	graphByMatrix  *G = new graphByMatrix(10);
+// 	std::map<uint32_t, maxEdgeValue> paths;
+// 
+// 	G->loadGraphFromFile("input/G1.txt");
+// 	G->printMatrix();
+// 	G->GetPaths(0, paths);
+// 	for (auto it = paths.begin(); it != paths.end(); it++)
+// 	{
+// 		std::cout << "Vertex: " << it->second << "\t" << "Wage:" << it->first << std::endl;
+// 	}
 
 	std::cin >> new char();		//patent by in¿. Piotr Masek
     return 0;

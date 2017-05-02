@@ -2,11 +2,27 @@
 #include <stdint.h>
 #include <map>
 #include <list>
+#include <set>
 using maxEdgeValue = int16_t;
 
 //using edge = std::pair<uint32_t, maxEdgeValue>;//represents edge by target vertex index and edge wage
 
 
+struct Edge
+{
+	uint32_t from, to;//represent index of vertices, from should be lower than to, to keep some order
+	maxEdgeValue wage;
+	Edge(uint32_t fromV, uint32_t toV, maxEdgeValue wageV)
+	{
+		if (fromV>toV)
+		{
+			std::swap(fromV, toV);
+		}
+		from = fromV;
+		to = toV;
+		wage = wageV;
+	}
+};
 
 class IGraph
 {
@@ -25,6 +41,9 @@ public:
 	each following line:	fromVertex toVertex wage
 	*/
 	bool loadGraphFromFile(std::string path);
+
+	std::set<Edge> Prim();
+
 
 	std::list<uint32_t> AStar(uint32_t startIndex, uint32_t targetIndex);
 
