@@ -12,7 +12,7 @@ class graphByMatrix : public IGraph
 private:
 	
 	maxEdgeValue* edges;//dynamic array representing edges in FROM\TO fashion, @seealso addEdge
-	bool directional;
+
 	
 public:
 	uint32_t getNumVerticies() const { return amountOfVerticies; }
@@ -25,6 +25,7 @@ public:
 		@directional - if true, only starting to ending edge is marked
 	*/
 	virtual void addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage=1) override;
+	virtual void resize(uint32_t targetSize) override;
 
 	// Inherited via IGraph
 	virtual void GetPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &neighbours) override;

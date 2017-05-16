@@ -4,10 +4,7 @@
 graphByMatrix::graphByMatrix(uint32_t verts, bool directional/*=false*/)
 {
 	this->directional = directional;
-	amountOfVerticies = verts;
-	edges = new maxEdgeValue[verts*verts];		//to keep all data in one memory block we use 1d array, use [x * width + y] to acces (x,y)
-	memset(edges, 0, sizeof(maxEdgeValue)*amountOfVerticies*amountOfVerticies);	//zero all edges so we know it's empty
-	
+	resize(verts);
 }
 
 void graphByMatrix::printMatrix()
@@ -37,6 +34,14 @@ void graphByMatrix::addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage/*=1*
 	edges[toV*amountOfVerticies + fromV] = wage;
 	if(!directional)
 		edges[fromV*amountOfVerticies + toV] = wage;
+}
+
+void graphByMatrix::resize(uint32_t targetSize)
+{
+	delete[] edges;
+	edges = new maxEdgeValue[targetSize*targetSize];
+	amountOfVerticies = targetSize;
+	memset(edges, -1, sizeof(maxEdgeValue)*amountOfVerticies*amountOfVerticies);	//set all edges at:doesn't exist
 }
 
 void graphByMatrix::GetPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &neighbours)

@@ -2,9 +2,12 @@
 #include <fstream>
 #include <iostream>
 #include <set>
+#include <vector>
+#include <utility>
 #include <limits>
+//#include "FiboHeap.h"
 
-bool IGraph::loadGraphFromFile(std::string path)
+bool IGraph::loadGraphFromFileWithWages(std::string path)
 {
 	std::fstream file(path, std::fstream::in);
 	if (!file)
@@ -26,18 +29,67 @@ bool IGraph::loadGraphFromFile(std::string path)
 	return true;
 }
 
+void IGraph::generateRandomGraph(uint8_t density)
+{
+	uint32_t minRand=0;
+	uint32_t maxRand= std::numeric_limits<uint32_t>::max()/2;
+	bool onPlane = 1;
+	if (coordinates)
+		onPlane = 0;
+	//generate cycle 
+	uint32_t lastStop = amountOfVerticies - 1;
+	for (uint32_t i = 0; i < lastStop; i++)
+	{	
+		//in initial cycle, we guarantee higher wages
+		addEdge(i, i + 1, onPlane ? minRand + rand() % (maxRand - minRand) +maxRand : vector2::getDistance(coordinates[i], coordinates[i + 1]));
+	}
+	//close the cycle(last to first)	//I guess I could extract method here but time...
+	addEdge(amountOfVerticies, 0, onPlane ? minRand + rand() % (maxRand - minRand) + maxRand : vector2::getDistance(coordinates[amountOfVerticies], coordinates[0]));
+	amountOfEdges = amountOfVerticies;
+	int32_t edgesLeft = density*amountOfVerticies*amountOfVerticies / 100 - amountOfVerticies;
+	 std::vector <std::pair<uint32_t, uint32_t> > edgePool;	//holds edges available to choose from
+	 edgePool.reserve(amountOfVerticies*amountOfVerticies - amountOfVerticies);
+	 for (uint32_t i = 0; i < amountOfVerticies-1; i++)	//I hope it will be optimized by complier
+		 for (uint32_t j = i + 1; j < amountOfVerticies;j++)
+		{
+			edgePool.push_back(std::make_pair(i, j));
+		}
+	 uint32_t randomIndex, from, to;
+	 while (edgesLeft>0)
+	{
+		randomIndex = rand() % edgePool.size();
+		from = edgePool[randomIndex].first;
+		to = edgePool[randomIndex].second;
+		addEdge(from, to, onPlane ? minRand + rand() % (maxRand - minRand) : vector2::getDistance(coordinates[to], coordinates[from]));
+		edgePool.pop_back();
+		edgesLeft--;
+	}
+
+}
+//used in A* to hold disovered nodes
 struct VertexValue
 {
 	uint32_t F, G, H, from;
-	uint32_t total() { return F; }
-	VertexValue(maxEdgeValue g, uint32_t h, uint32_t from) 
+	const uint32_t total() { return F; }
+	VertexValue(maxEdgeValue g, uint32_t h, uint32_t from)
 	{
 		G = g; //cost to get from "from" vertex
 		H = h; //lowest possible cost, guessed by heuristics
-		F = G + H; 
-		this->from = from; }
+		F = G + H;
+		this->from = from;
+	}
 	VertexValue() {};
+
+	friend bool operator<(const VertexValue& l, const VertexValue& r) 
+	{
+		return l.F < r.F; //using total() gives error
+	}
+	
 };
+
+
+
+
 
 std::list<uint32_t> IGraph::AStar(uint32_t startIndex, uint32_t targetIndex)
 {

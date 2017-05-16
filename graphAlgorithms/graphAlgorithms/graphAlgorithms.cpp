@@ -17,7 +17,7 @@
 	https://en.wikipedia.org/wiki/Prim%27s_algorithm
 
 	https://en.wikipedia.org/wiki/A*_search_algorithm
-	http://www.cc.gatech.edu/~echow/pubs/levdiff-aaai.pdf	A* herusitics with center concepts
+	http://www.cc.gatech.edu/~echow/pubs/levdiff-aaai.pdf	A* herusitics with center concepts. Forget it, Euklisdes FTW
 	
 */
 
@@ -26,6 +26,10 @@ int main()
 	TestUnit testUnit;
 	testUnit.testG1Load();
 	testUnit.testG1AStar();
+
+	graphByMatrix  *G = new graphByMatrix(10);
+	G->generateRandomGraph(1);
+	G->printMatrix();
 
 // 	graphByMatrix  *G = new graphByMatrix(10);
 // 	std::map<uint32_t, maxEdgeValue> paths;

@@ -3,6 +3,7 @@
 #include <map>
 #include <list>
 #include <set>
+//#include "boost/heap/fibonacci_heap.hpp"
 using maxEdgeValue = int16_t;
 
 //using edge = std::pair<uint32_t, maxEdgeValue>;//represents edge by target vertex index and edge wage
@@ -24,30 +25,47 @@ struct Edge
 	}
 };
 
+struct vector2
+{
+	maxEdgeValue x, y;	//max wage is described by 
+	vector2(maxEdgeValue x, maxEdgeValue y)
+	{
+		this->x = x;
+		this->y = y;
+	}
+	static maxEdgeValue getDistance(vector2 &from, vector2 &to)
+	{
+		return (maxEdgeValue) sqrt(pow((to.x - from.x), 2) + pow((to.y - from.y), 2));
+	}
+};
+
 class IGraph
 {
 protected:
 	uint32_t amountOfVerticies=0;
 	uint32_t amountOfEdges = 0;
+	bool directional;
+	vector2* coordinates; //holds array of coordinates of vertices.
 public:
 	 /*  returns number of paths going from given vertex and creates array of them in @neighbours map
 	 @vertex - vertex which we check for outgoing edges
 	 @neighbours - < wage of edge to vertex, vertex index>	 */
 	virtual void GetPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &neighbours) = 0;
+	//adds edge between vertices of given indexes, with given wage, edge will be directed based on "directional" member variable
 	virtual void addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage = 1) = 0;
+	//changes amount of vertices and ERASES all edges
+	virtual void resize(uint32_t targetSize) =0;
 	/*
 		Valid format:
 	1st line:				edgesNum vertixesNum
 	each following line:	fromVertex toVertex wage
 	*/
-	bool loadGraphFromFile(std::string path);
-
-	std::set<Edge> Prim();
-
+	bool loadGraphFromFileWithWages(std::string path);
+	void generateRandomGraph(uint8_t density);
 
 	std::list<uint32_t> AStar(uint32_t startIndex, uint32_t targetIndex);
 
-	//helper function for A*, not sure what exactly is correct here, gonna try http://www.cc.gatech.edu/~echow/pubs/levdiff-aaai.pdf
+	//helper function for A*
 	maxEdgeValue getHeuristic(uint32_t vertexIndex);
 
 	IGraph();

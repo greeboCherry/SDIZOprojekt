@@ -5,7 +5,7 @@ void TestUnit::testG1Load()
 {
 	IGraph *G = new graphByMatrix(10);
 	
-	if (!G->loadGraphFromFile("input/G1.txt"))
+	if (!G->loadGraphFromFileWithWages("input/G1.txt"))
 	{
 		std::cout << "Can't read output/G1.txt, tests not possible\n";
 		return;
@@ -55,7 +55,7 @@ void TestUnit::testG1AStar()
 {
 	IGraph *G = new graphByMatrix(10);
 
-	if (!G->loadGraphFromFile("input/G1.txt"))
+	if (!G->loadGraphFromFileWithWages("input/G1.txt"))
 	{
 		std::cout << "Can't read output/G1.txt, tests not possible\n";
 		return;
