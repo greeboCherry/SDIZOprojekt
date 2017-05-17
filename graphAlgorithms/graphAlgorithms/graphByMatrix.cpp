@@ -3,7 +3,7 @@
 
 graphByMatrix::graphByMatrix(uint32_t verts, bool directional/*=false*/)
 {
-	this->directional = directional;
+	this->directed = directional;
 	resize(verts);
 }
 
@@ -32,7 +32,7 @@ numeration starts from 0
 void graphByMatrix::addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage/*=1*/)
 {
 	edges[toV*amountOfVerticies + fromV] = wage;
-	if(!directional)
+	if(!directed)
 		edges[fromV*amountOfVerticies + toV] = wage;
 }
 

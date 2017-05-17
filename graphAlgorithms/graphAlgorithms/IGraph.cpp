@@ -46,19 +46,23 @@ void IGraph::generateRandomGraph(uint8_t density)
 	//close the cycle(last to first)	//I guess I could extract method here but time...
 	addEdge(amountOfVerticies-1, 0, onPlane ? minRand + rand() % (maxRand - minRand) + maxRand : vector2::getDistance(coordinates[amountOfVerticies-1], coordinates[0]));
 	amountOfEdges = amountOfVerticies;
-	int32_t edgesLeft = density*amountOfVerticies*(amountOfVerticies - 1) / (directional ? 1 : 2) / 100 - amountOfVerticies;
+	int32_t edgesLeft = density*amountOfVerticies*(amountOfVerticies - 1) / (directed ? 1 : 2) / 100 - amountOfVerticies;
 	 std::vector <std::pair<uint32_t, uint32_t> > edgePool;	//holds edges available to choose from
 	 
-	 int initialPoolSize = amountOfVerticies*(amountOfVerticies - 1) / (directional ? 1 : 2) - amountOfVerticies;
+	 int initialPoolSize = amountOfVerticies*(amountOfVerticies - 1) / (directed ? 1 : 2) - amountOfVerticies;
 	 if (initialPoolSize < 0)
 		 return;
 	 edgePool.reserve (initialPoolSize);
-	 for (uint32_t i = 0; i < amountOfVerticies; i++)	//I hope it will be optimized by complier
+	 //add edges to pool to choose from.
+	 for (uint32_t i = 0; i < amountOfVerticies; i++)
+		 //todo: try if j=i allows for deletion of j>i
 		 for (uint32_t j = 0 ; j < amountOfVerticies;j++)
 		{
-			if(i!=j && i+1!=j )
-				if(!(i == 0 && j== amountOfVerticies - 1))
-					if(!directional||(i<j))
+			if(i==j || i+1==j || (i == amountOfVerticies - 1 && j == 0) //self joining and those edges in cycle
+				||( !directed&&(i==j+1||(i==0&&j==amountOfVerticies-1) || j>i) )		//reverse cycle in non-directed 
+				)
+			continue;
+				
 						
 			edgePool.push_back(std::make_pair(i, j));
 		}

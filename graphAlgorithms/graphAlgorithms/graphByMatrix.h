@@ -22,7 +22,7 @@ public:
 		@fromV - starting vertex
 		@toV - ending vertex
 		@wage - wage/cost/whatever of traversing from one to another
-		@directional - if true, only starting to ending edge is marked
+		@directed - if true, only starting to ending edge is marked
 	*/
 	virtual void addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage=1) override;
 	virtual void resize(uint32_t targetSize) override;

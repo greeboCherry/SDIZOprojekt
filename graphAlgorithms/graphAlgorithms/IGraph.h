@@ -44,14 +44,14 @@ class IGraph
 protected:
 	uint32_t amountOfVerticies=0;
 	uint32_t amountOfEdges = 0;
-	bool directional;
+	bool directed;
 	vector2* coordinates; //holds array of coordinates of vertices.
 public:
 	 /*  returns number of paths going from given vertex and creates array of them in @neighbours map
 	 @vertex - vertex which we check for outgoing edges
 	 @neighbours - < wage of edge to vertex, vertex index>	 */
 	virtual void GetPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &neighbours) = 0;
-	//adds edge between vertices of given indexes, with given wage, edge will be directed based on "directional" member variable
+	//adds edge between vertices of given indexes, with given wage, edge will be directed based on "directed" member variable
 	virtual void addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage = 1) = 0;
 	//changes amount of vertices and ERASES all edges
 	virtual void resize(uint32_t targetSize) =0;
@@ -62,6 +62,7 @@ public:
 	each following line:	fromVertex toVertex wage
 	*/
 	bool loadGraphFromFileWithWages(std::string path);
+	//give density in 1-100, else it might not work 
 	void generateRandomGraph(uint8_t density);
 
 	std::list<uint32_t> AStar(uint32_t startIndex, uint32_t targetIndex);

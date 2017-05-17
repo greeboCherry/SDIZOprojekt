@@ -3,13 +3,20 @@ nt	gen on plane
 	list form
 	flow
 	Boruvka
-	menu
 
+	menu
 	
 	11-30 west gate, recepcja
 	Andrzej Zimny
 	
 
+	old generation of edges, not working rly but keep
 	
-	
-	
+	 for (uint32_t j = 0 ; j < amountOfVerticies;j++)
+		{
+			if(i!=j && i+1!=j )
+				if(!(i == 0 && j== amountOfVerticies - 1))
+					if(directional||(i<j))
+						
+			edgePool.push_back(std::make_pair(i, j));
+		}

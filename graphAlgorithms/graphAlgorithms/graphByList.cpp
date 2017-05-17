@@ -2,7 +2,7 @@
 #include <iostream>
 graphByList::graphByList(uint32_t verts, bool directional/*=false*/)
 {
-	this->directional = directional;
+	this->directed = directional;
 	resize(verts);
 }
 
@@ -18,7 +18,7 @@ void graphByList::addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage = 1)
 {
 	
 	vertices->at(fromV).emplace(toV, wage);
-	if (!directional)
+	if (!directed)
 		vertices->at(toV).emplace(fromV, wage);
 }
 
@@ -34,10 +34,10 @@ void graphByList::printMatrix()
 	uint32_t i = 0;
 	for each (auto v in *vertices)
 	{
-		std::cout << "Vertex no. " << i<<"\t";
+		std::cout << "Vertex no. " << i<<" edges \t";
 		for each (auto e in v)
 		{
-			std::cout << "Edge to " << e.first << "\tcosts " << e.second << "\t";
+			std::cout << "(" << e.first << "|" << e.second << ")\t";
 		}
 		std::cout<<std::endl;
 		i++;

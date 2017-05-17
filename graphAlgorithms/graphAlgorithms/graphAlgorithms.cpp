@@ -28,7 +28,7 @@ int main()
 	TestUnit testUnit;
 	testUnit.testG1Load();
 	testUnit.testG1AStar();
-	std::unique_ptr<IGraph> GM = std::make_unique<graphByList>(3, 1);
+	std::unique_ptr<IGraph> GM = std::make_unique<graphByList>(4, false);
 	GM->generateRandomGraph(100);
 	GM->printMatrix();
 
