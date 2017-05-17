@@ -2,7 +2,9 @@
 //
 //#include "stdafx.h"
 #include "graphByMatrix.h"
+#include "graphByList.h"
 #include "TestUnit.h"
+#include <memory>
 
 /*
 	Pytania:
@@ -26,10 +28,9 @@ int main()
 	TestUnit testUnit;
 	testUnit.testG1Load();
 	testUnit.testG1AStar();
-
-	graphByMatrix  *G = new graphByMatrix(10);
-	G->generateRandomGraph(1);
-	G->printMatrix();
+	std::unique_ptr<IGraph> GM = std::make_unique<graphByList>(3, 1);
+	GM->generateRandomGraph(100);
+	GM->printMatrix();
 
 // 	graphByMatrix  *G = new graphByMatrix(10);
 // 	std::map<uint32_t, maxEdgeValue> paths;

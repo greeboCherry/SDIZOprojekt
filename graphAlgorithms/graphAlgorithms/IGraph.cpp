@@ -44,14 +44,22 @@ void IGraph::generateRandomGraph(uint8_t density)
 		addEdge(i, i + 1, onPlane ? minRand + rand() % (maxRand - minRand) +maxRand : vector2::getDistance(coordinates[i], coordinates[i + 1]));
 	}
 	//close the cycle(last to first)	//I guess I could extract method here but time...
-	addEdge(amountOfVerticies, 0, onPlane ? minRand + rand() % (maxRand - minRand) + maxRand : vector2::getDistance(coordinates[amountOfVerticies], coordinates[0]));
+	addEdge(amountOfVerticies-1, 0, onPlane ? minRand + rand() % (maxRand - minRand) + maxRand : vector2::getDistance(coordinates[amountOfVerticies-1], coordinates[0]));
 	amountOfEdges = amountOfVerticies;
-	int32_t edgesLeft = density*amountOfVerticies*amountOfVerticies / 100 - amountOfVerticies;
+	int32_t edgesLeft = density*amountOfVerticies*(amountOfVerticies - 1) / (directional ? 1 : 2) / 100 - amountOfVerticies;
 	 std::vector <std::pair<uint32_t, uint32_t> > edgePool;	//holds edges available to choose from
-	 edgePool.reserve(amountOfVerticies*amountOfVerticies - amountOfVerticies);
-	 for (uint32_t i = 0; i < amountOfVerticies-1; i++)	//I hope it will be optimized by complier
-		 for (uint32_t j = i + 1; j < amountOfVerticies;j++)
+	 
+	 int initialPoolSize = amountOfVerticies*(amountOfVerticies - 1) / (directional ? 1 : 2) - amountOfVerticies;
+	 if (initialPoolSize < 0)
+		 return;
+	 edgePool.reserve (initialPoolSize);
+	 for (uint32_t i = 0; i < amountOfVerticies; i++)	//I hope it will be optimized by complier
+		 for (uint32_t j = 0 ; j < amountOfVerticies;j++)
 		{
+			if(i!=j && i+1!=j )
+				if(!(i == 0 && j== amountOfVerticies - 1))
+					if(!directional||(i<j))
+						
 			edgePool.push_back(std::make_pair(i, j));
 		}
 	 uint32_t randomIndex, from, to;

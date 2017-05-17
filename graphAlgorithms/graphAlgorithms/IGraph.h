@@ -55,6 +55,7 @@ public:
 	virtual void addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage = 1) = 0;
 	//changes amount of vertices and ERASES all edges
 	virtual void resize(uint32_t targetSize) =0;
+	virtual void printMatrix() = 0;
 	/*
 		Valid format:
 	1st line:				edgesNum vertixesNum

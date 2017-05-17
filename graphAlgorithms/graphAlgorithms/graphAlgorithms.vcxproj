@@ -150,6 +150,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="graphByList.h" />
     <ClInclude Include="graphByMatrix.h" />
     <ClInclude Include="IGraph.h" />
     <ClInclude Include="stdafx.h" />
@@ -158,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="graphAlgorithms.cpp" />
+    <ClCompile Include="graphByList.cpp" />
     <ClCompile Include="graphByMatrix.cpp" />
     <ClCompile Include="IGraph.cpp" />
     <ClCompile Include="TestUnit.cpp" />
