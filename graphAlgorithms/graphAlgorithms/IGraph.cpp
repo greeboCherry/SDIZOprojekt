@@ -29,24 +29,40 @@ bool IGraph::loadGraphFromFileWithWages(std::string path)
 	return true;
 }
 
-void IGraph::generateRandomGraph(uint8_t density)
+void IGraph::generateRandomGraph(uint8_t density, bool onPlane)
 {
 	uint32_t minRand=0;
 	uint32_t maxRand= std::numeric_limits<uint32_t>::max()/2;
-	bool onPlane = 1;
-	if (coordinates)
-		onPlane = 0;
+	 delete[] coordinates;
+	if (onPlane)
+	{
+		maxEdgeValue maxCoord = std::numeric_limits<maxEdgeValue>::max();
+		coordinates = new vector2[amountOfVerticies];
+		for (uint32_t i = 0; i < amountOfVerticies;i++)
+		{
+			coordinates[i].x = rand() % maxCoord;
+			coordinates[i].y = rand() % maxCoord;
+		}
+	}
+
 	//generate cycle 
 	uint32_t lastStop = amountOfVerticies - 1;
 	for (uint32_t i = 0; i < lastStop; i++)
 	{	
 		//in initial cycle, we guarantee higher wages
-		addEdge(i, i + 1, onPlane ? minRand + rand() % (maxRand - minRand) +maxRand : vector2::getDistance(coordinates[i], coordinates[i + 1]));
+	
+		addEdge(i, i + 1,
+			onPlane ? 
+			vector2::getDistance(coordinates[i], coordinates[i + 1]) :
+			minRand + rand() % (maxRand - minRand) + maxRand);
 	}
 	//close the cycle(last to first)	//I guess I could extract method here but time...
-	addEdge(amountOfVerticies-1, 0, onPlane ? minRand + rand() % (maxRand - minRand) + maxRand : vector2::getDistance(coordinates[amountOfVerticies-1], coordinates[0]));
-	amountOfEdges = amountOfVerticies;
+	addEdge(amountOfVerticies-1, 0, onPlane ?
+		vector2::getDistance(coordinates[amountOfVerticies-1], coordinates[0]):
+		minRand + rand() % (maxRand - minRand) + maxRand);
+	
 	int32_t edgesLeft = density*amountOfVerticies*(amountOfVerticies - 1) / (directed ? 1 : 2) / 100 - amountOfVerticies;
+	amountOfEdges += amountOfVerticies;
 	 std::vector <std::pair<uint32_t, uint32_t> > edgePool;	//holds edges available to choose from
 	 
 	 int initialPoolSize = amountOfVerticies*(amountOfVerticies - 1) / (directed ? 1 : 2) - amountOfVerticies;
@@ -72,7 +88,9 @@ void IGraph::generateRandomGraph(uint8_t density)
 		randomIndex = rand() % edgePool.size();
 		from = edgePool[randomIndex].first;
 		to = edgePool[randomIndex].second;
-		addEdge(from, to, onPlane ? minRand + rand() % (maxRand - minRand) : vector2::getDistance(coordinates[to], coordinates[from]));
+		addEdge(from, to, onPlane ? 
+			vector2::getDistance(coordinates[to], coordinates[from]):
+			minRand + rand() % (maxRand - minRand));
 		edgePool.pop_back();
 		edgesLeft--;
 	}
@@ -99,10 +117,6 @@ struct VertexValue
 	
 };
 
-
-
-
-
 std::list<uint32_t> IGraph::AStar(uint32_t startIndex, uint32_t targetIndex)
 {
 	std::list<uint32_t> path;
@@ -126,7 +140,7 @@ std::list<uint32_t> IGraph::AStar(uint32_t startIndex, uint32_t targetIndex)
 		}
 		closed.emplace(currentIndex, open.at(currentIndex));
 		open.erase(currentIndex);
-		GetPaths(currentIndex, neighbours);
+		getPaths(currentIndex, neighbours);
 		for each (auto n in neighbours)
 		{
 			if (n.first == targetIndex)	//If the node is the goal node, set its parent to the current node and store the final path.
@@ -178,4 +192,5 @@ IGraph::IGraph()
 
 IGraph::~IGraph()
 {
+	delete[] coordinates;
 }

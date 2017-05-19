@@ -1,6 +1,6 @@
 d	resize
-nt	gen on plane
-	list form
+	gen on plane //genning works, but could be tested more
+d	list form
 	flow
 	Boruvka
 

@@ -29,7 +29,7 @@ int main()
 	testUnit.testG1Load();
 	testUnit.testG1AStar();
 	std::unique_ptr<IGraph> GM = std::make_unique<graphByList>(4, false);
-	GM->generateRandomGraph(100);
+	GM->generateRandomGraph(100, 1 );
 	GM->printMatrix();
 
 // 	graphByMatrix  *G = new graphByMatrix(10);
@@ -37,7 +37,7 @@ int main()
 // 
 // 	G->loadGraphFromFile("input/G1.txt");
 // 	G->printMatrix();
-// 	G->GetPaths(0, paths);
+// 	G->getPaths(0, paths);
 // 	for (auto it = paths.begin(); it != paths.end(); it++)
 // 	{
 // 		std::cout << "Vertex: " << it->second << "\t" << "Wage:" << it->first << std::endl;

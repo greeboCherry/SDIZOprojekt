@@ -1,9 +1,11 @@
 #include "TestUnit.h"
+#include "graphByList.h"
 #include "graphByMatrix.h"
+#include <memory>
 
 void TestUnit::testG1Load()
 {
-	IGraph *G = new graphByMatrix(10);
+	std::unique_ptr<IGraph> G = std::make_unique<graphByList>(10);
 	
 	if (!G->loadGraphFromFileWithWages("input/G1.txt"))
 	{
@@ -12,38 +14,38 @@ void TestUnit::testG1Load()
 	}
 	bool ok = true;
 	std::map<uint32_t, maxEdgeValue> neighbours;
-	G->GetPaths(0, neighbours);
+	G->getPaths(0, neighbours);
 	if (neighbours.size() != 3)
 		ok = false;
 
-	G->GetPaths(1, neighbours);
+	G->getPaths(1, neighbours);
 	if (neighbours.size() != 3)
 		ok = false;
-	G->GetPaths(2, neighbours);
+	G->getPaths(2, neighbours);
 	if (neighbours.size() != 2)
 		ok = false;
 
-	G->GetPaths(3, neighbours);
+	G->getPaths(3, neighbours);
 	if (neighbours.size() != 2)
 		ok = false;
 
-	G->GetPaths(4, neighbours);
+	G->getPaths(4, neighbours);
 	if (neighbours.size() != 4)
 		ok = false;
 
-	G->GetPaths(5, neighbours);
+	G->getPaths(5, neighbours);
 	if (neighbours.size() != 1)
 		ok = false;
 
-	G->GetPaths(5, neighbours);
+	G->getPaths(5, neighbours);
 	if (neighbours.size() != 1)
 		ok = false;
 
-	G->GetPaths(6, neighbours);
+	G->getPaths(6, neighbours);
 	if (neighbours.size() != 0)
 		ok = false;
 
-	G->GetPaths(7, neighbours);
+	G->getPaths(7, neighbours);
 	if (neighbours.size() != 2)
 		ok = false;
 
@@ -53,7 +55,7 @@ void TestUnit::testG1Load()
 
 void TestUnit::testG1AStar()
 {
-	IGraph *G = new graphByMatrix(10);
+	std::unique_ptr<IGraph> G = std::make_unique<graphByList>(10);
 
 	if (!G->loadGraphFromFileWithWages("input/G1.txt"))
 	{

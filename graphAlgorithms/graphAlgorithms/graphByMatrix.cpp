@@ -44,7 +44,7 @@ void graphByMatrix::resize(uint32_t targetSize)
 	memset(edges, -1, sizeof(maxEdgeValue)*amountOfVerticies*amountOfVerticies);	//set all edges at:doesn't exist
 }
 
-void graphByMatrix::GetPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &neighbours)
+void graphByMatrix::getPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &neighbours)
 {
 	neighbours.clear();
 	const uint32_t row = vertex*amountOfVerticies;	//we don't want to multiply it every time loop goes by, right?
@@ -58,7 +58,7 @@ void graphByMatrix::GetPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &
 //above: stl
 //below: no stl and not working
 /*
-uint32_t graphByMatrix::GetPaths(uint32_t vertex, Path results[])
+uint32_t graphByMatrix::getPaths(uint32_t vertex, Path results[])
 {
 	//temp for the amount of edges going out of given vertex
 	uint32_t result=0;

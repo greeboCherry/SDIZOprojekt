@@ -10,8 +10,9 @@ graphByList::~graphByList()
 {
 }
 
-void graphByList::GetPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue>& neighbours)
+void graphByList::getPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue>& neighbours)
 {
+		neighbours = vertices -> at(vertex);
 }
 
 void graphByList::addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage = 1)
