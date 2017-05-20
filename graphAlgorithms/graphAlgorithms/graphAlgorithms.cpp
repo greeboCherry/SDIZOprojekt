@@ -28,8 +28,8 @@ int main()
 	TestUnit testUnit;
 	testUnit.testG1Load();
 	testUnit.testG1AStar();
-	std::unique_ptr<IGraph> GM = std::make_unique<graphByList>(4, false);
-	GM->generateRandomGraph(100, 1 );
+	std::unique_ptr<IGraph> GM = std::make_unique<graphByMatrix>(10, true);
+	GM->generateRandomGraph(50, 1 );
 	GM->printMatrix();
 
 // 	graphByMatrix  *G = new graphByMatrix(10);

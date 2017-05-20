@@ -91,7 +91,7 @@ void IGraph::generateRandomGraph(uint8_t density, bool onPlane)
 		addEdge(from, to, onPlane ? 
 			vector2::getDistance(coordinates[to], coordinates[from]):
 			minRand + rand() % (maxRand - minRand));
-		edgePool.pop_back();
+		edgePool.erase(edgePool.begin() + randomIndex);
 		edgesLeft--;
 	}
 
