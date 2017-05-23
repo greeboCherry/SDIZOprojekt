@@ -37,7 +37,7 @@ int main()
 
 	G->generateRandomGraph(50, false);
 	G->printMatrix();
-	G->Boruvka();
+	auto boRes=	G->Boruvka();
 // 	G->getPaths(0, paths);
 // 	for (auto it = paths.begin(); it != paths.end(); it++)
 // 	{

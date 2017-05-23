@@ -214,6 +214,8 @@ auto comp = [](Edge& a, Edge& b) { return a.wage > b.wage; };//comparator for mi
 std::vector<Edge> IGraph::Boruvka()
 {
 	std::map<uint32_t, maxEdgeValue> neigbours;
+	std::vector<Edge> result;
+	result.reserve(amountOfVerticies - 1);
 
 	//1.Initialize a forest T to be a set of one - vertex trees, one for each vertex of the graph.
 	std::list<b_Tree> forest;
@@ -222,18 +224,18 @@ std::vector<Edge> IGraph::Boruvka()
 		forest.push_back(b_Tree(i));
 
 	}
-	while (forest.size()>3) //2.   While T has more than one component:
+	do  //2.   While T has more than one component:
 	{
-		for (auto currentTree = forest.rbegin(); currentTree != forest.rend(); currentTree++)
+		for (auto currentTree = forest.begin(); currentTree != forest.end(); /*no increment here because of if in body*/)
 		/*for each (auto currentTree in forest)*/
 		{
 			std::priority_queue<Edge, std::vector<Edge>, decltype(comp)> queue(comp);
-			for each (uint32_t indexNumer in currentTree->verticesIncluded)
+			for each (uint32_t indexNumber in currentTree->verticesIncluded)
 			{
-				getPaths(indexNumer, neigbours);	
+				getPaths(indexNumber, neigbours);	
 				for each (auto path in neigbours)
 				{
-					queue.push(Edge(indexNumer, path.first, path.second));
+					queue.push(Edge(indexNumber, path.first, path.second));
 				}
 			} 
 			//now we have all edges of subtree in queue
@@ -246,31 +248,42 @@ std::vector<Edge> IGraph::Boruvka()
 				{
 							//TODO try using std::find_if
 					
-					for (auto it = forest.rbegin(); it != forest.rend(); it++)
+					for (auto it = forest.begin(); it != forest.end(); it++)
 					{
-					
+// 						//debug
+// 						for (auto itd = forest.begin(); itd != forest.end(); itd++)
+// 						{
+// 							std::cout << std::addressof(*itd) << std::endl;
+// 						}
+// 						//end of debug
 						if (it->containsVertex(currentEdge.to))
 						{
+							if (it == currentTree)	//should not be here, anyway, it can crash without coming here
+								std::cout << "WTF? you shouldn't be here!!!!!!!!" << std::endl;
 							it->merge(*currentTree);
-							
-							forest.erase(std::next(currentTree).base());	//zamiana reverse iteratora na zwyk³y i erase
-							//add new edge
+							currentTree = forest.erase(currentTree);
+							//currentTree=forest.erase(std::next(currentTree).base());	//zamiana reverse iteratora na zwyk³y i erase
+							result.push_back(currentEdge);
 							merged = 1;
 
 							break;
 						}
+					//	else
+					//		currentTree++;//iterating both at once or sth?
 						
 					}
 				}
 				queue.pop();	//else drop it and we'll try next one
 
 			}
+			if (forest.size() == 1)
+				break;
 		}
 		std::cout << "Boruvka iteration" << std::endl;
-	}
+	} while (forest.size() > 1);
 
-	std::vector<Edge> result;
-	result.size();
+	
+	result.size(); //todo: put sth here
 //	forest[0].edgesInlcuded;
 	return result;
 }
