@@ -6,6 +6,18 @@ graphByList::graphByList(uint32_t verts, bool directional/*=false*/)
 	resize(verts);
 }
 
+graphByList::graphByList(const graphByList& other)
+{
+	vertices = std::make_unique<std::vector < std::map<uint32_t, maxEdgeValue>> >();
+	vertices->resize(other.vertices->size());
+	std::copy(other.vertices->begin(), other.vertices->end(), vertices->begin());
+
+	amountOfVerticies = other.amountOfVerticies;
+	amountOfEdges = other.amountOfEdges;
+	directed = other.directed;
+	//vector2* coordinates; //let's skip this, ain't gonna be used, rly
+}
+
 graphByList::~graphByList()
 {
 }
@@ -43,4 +55,14 @@ void graphByList::printMatrix()
 		std::cout<<std::endl;
 		i++;
 	}
+}
+
+IGraph* graphByList::clone()
+{
+// 	IGraph* copy;
+// 	copy= new graphByList(*this);
+// 
+// 	return copy;
+	//return new graphByList(static_cast<const graphByList&> (*this));
+	return new graphByList(*this);
 }

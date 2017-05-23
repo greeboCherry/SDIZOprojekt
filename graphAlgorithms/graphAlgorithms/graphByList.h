@@ -8,6 +8,7 @@ class graphByList :	public IGraph
 	std::unique_ptr<	std::vector < std::map<uint32_t, maxEdgeValue>> >  vertices; 
 public:
 	graphByList(uint32_t verts, bool directional=false);
+	graphByList(const graphByList& other);
 	~graphByList();
 
 	// Inherited via IGraph
@@ -15,6 +16,7 @@ public:
 	virtual void addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage /*= 1*/) override;
 	virtual void resize(uint32_t targetSize) override;
 	virtual void printMatrix() override;
+	virtual IGraph* clone() override;
 
 };
 

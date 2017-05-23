@@ -28,23 +28,30 @@ int main()
 	TestUnit testUnit;
 	testUnit.testG1Load();
 	testUnit.testG1AStar();
-	std::unique_ptr<IGraph> GM = std::make_unique<graphByMatrix>(100, true);
-	GM->generateRandomGraph(50, 1 );
+	testUnit.testRandomAStar();
+	testUnit.testRandomBoruvka();
+	testUnit.testRandomFF();
+	
+	
+	//std::unique_ptr<IGraph> GM = std::make_unique<graphByMatrix>(100, true);
+
+
+	//GM->generateRandomGraph(50, 1 );
 	//GM->printMatrix();
 
- 	graphByMatrix  *G = new graphByMatrix(10);
- 	std::map<uint32_t, maxEdgeValue> paths;
-
-	G->generateRandomGraph(50, false);
-	G->printMatrix();
-	auto boRes=	G->Boruvka();
+//  	graphByMatrix  *G = new graphByMatrix(10);
+//  	std::map<uint32_t, maxEdgeValue> paths;
+// 
+// 	G->generateRandomGraph(50, false);
+// 	G->printMatrix();
+// 	auto boRes=	G->Boruvka();
 // 	G->getPaths(0, paths);
 // 	for (auto it = paths.begin(); it != paths.end(); it++)
 // 	{
 // 		std::cout << "Vertex: " << it->second << "\t" << "Wage:" << it->first << std::endl;
 // 	}
-
-	std::cin >> new char();		//patent by in¿. Piotr Masek
+	std::cout << "That's it, give any char to continue";
+	std::cin >> new char();
     return 0;
 }
 

@@ -3,9 +3,13 @@
 #include "graphByMatrix.h"
 #include <memory>
 
+using graphType = graphByList;
+
+//using graphType = graphByMatrix;
+
 void TestUnit::testG1Load()
 {
-	std::unique_ptr<IGraph> G = std::make_unique<graphByList>(10);
+	std::unique_ptr<IGraph> G = std::make_unique<graphType>(10);
 	
 	if (!G->loadGraphFromFileWithWages("input/G1.txt"))
 	{
@@ -55,7 +59,7 @@ void TestUnit::testG1Load()
 
 void TestUnit::testG1AStar()
 {
-	std::unique_ptr<IGraph> G = std::make_unique<graphByList>(10);
+	std::unique_ptr<IGraph> G = std::make_unique<graphType>(10);
 
 	if (!G->loadGraphFromFileWithWages("input/G1.txt"))
 	{
@@ -63,6 +67,29 @@ void TestUnit::testG1AStar()
 		return;
 	}
 	auto path = G->AStar(0, 5);
-	std::cout << "testG1AStar " << (path.size()==4 ? "passed" : "failed") << " got " << path.size()<< " expected 4" <<std::endl;
+	std::cout << "testG1AStar " << (path.size() == 4 ? "passed" : "failed") << " got " << path.size() << " expected 4" << std::endl;
 }
 
+
+void TestUnit::testRandomAStar()
+{
+	std::unique_ptr<IGraph> G = std::make_unique<graphType>(10);
+
+	G->generateRandomGraph(40, true);
+	auto path = G->AStar(0, 5);
+	std::cout << "testRandomAStar didn't crash on plane(with heuristics)" << std::endl;
+}
+
+void TestUnit::testRandomBoruvka()
+{
+	std::unique_ptr<IGraph> G = std::make_unique<graphType>(10);
+	G->generateRandomGraph(30, false);
+}
+
+void TestUnit::testRandomFF()
+{
+	std::unique_ptr<IGraph> G = std::make_unique<graphType>(10);
+	G->generateRandomGraph(30, false);
+	auto r = G->FordFulkerson(0, 4);
+	std::cout << "testRandomFF didn't crash" << std::endl;
+}

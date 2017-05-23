@@ -7,6 +7,16 @@ graphByMatrix::graphByMatrix(uint32_t verts, bool directional/*=false*/)
 	resize(verts);
 }
 
+graphByMatrix::graphByMatrix(const graphByMatrix& other)
+{
+	amountOfVerticies = other.amountOfVerticies;
+	amountOfEdges = other.amountOfEdges;
+	directed = other.directed;
+	//vector2* coordinates; //let's skip this, ain't gonna be used, rly
+	edges = new maxEdgeValue[amountOfEdges];
+	memcpy(edges, other.edges, sizeof(maxEdgeValue)*amountOfVerticies*amountOfVerticies);
+}
+
 void graphByMatrix::printMatrix()
 {
 	for (uint32_t i = 0; i < amountOfVerticies; i++)
@@ -55,33 +65,8 @@ void graphByMatrix::getPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &
 	}
 }
 
-//above: stl
-//below: no stl and not working
-/*
-uint32_t graphByMatrix::getPaths(uint32_t vertex, Path results[])
+IGraph* graphByMatrix::clone()
 {
-	//temp for the amount of edges going out of given vertex
-	uint32_t result=0;
-	const uint32_t row = vertex*amountOfVerticies;
-	for (uint32_t i = 0; i < amountOfVerticies; i++)
-	{
-		if (edges[row + i] > 0)
-			result++;
-	}
-	delete[] results;
-	results = new Path[result];
-	for (uint32_t i = 0; i < amountOfVerticies; i++)
-	{
-		if (edges[row + i] > 0)
-		{
-			results[i].wage = edges[row + i];
-			results[i].destination = i;
-		}
-
-	}
-	return result;
+	return new graphByMatrix(*this);
 }
-*/
-
-
 

@@ -6,6 +6,7 @@
 #include <utility>
 #include <limits>
 #include <queue>
+#include <memory>
 
 bool IGraph::loadGraphFromFileWithWages(std::string path)
 {
@@ -100,7 +101,7 @@ struct VertexValue
 {
 	uint32_t F, G, H, from;
 	const uint32_t total() { return F; }
-	VertexValue(maxEdgeValue g, uint32_t h, uint32_t from)
+	VertexValue(maxEdgeValue g, int32_t h, int32_t from)
 	{
 		G = g; //cost to get from "from" vertex
 		H = h; //lowest possible cost, guessed by heuristics
@@ -129,7 +130,7 @@ std::vector<uint32_t> IGraph::AStar(uint32_t startIndex, uint32_t targetIndex)
 	while (!open.empty())
 	{
 		lowestF = std::numeric_limits<uint32_t>::max();
-		for (auto o : open)	//among open nodes, find the cheapest one to go
+		for (auto o : open)	//among open nodes, find the cheapest one to go	//TODO use stl find?
 		{
 			if (o.second.total()<lowestF)
 			{
@@ -162,7 +163,7 @@ std::vector<uint32_t> IGraph::AStar(uint32_t startIndex, uint32_t targetIndex)
 			itc = open.find(n.first);
 			if (itc == open.end())	//If the node is not in the closed list and the open list, set its parent to the current node and calculate its G and F value.
 			{
-				open.emplace(n.first, VertexValue(closed.at(currentIndex).G, getHeuristic(n.first), currentIndex));
+				open.emplace(n.first, VertexValue(closed.at(currentIndex).G, getHeuristic(n.first, targetIndex), currentIndex));
 			}
 			else//If the node is not in the closed list but is in the open list, whether the path between it and the current node is quicker than its current path.
 			{
@@ -288,9 +289,20 @@ std::vector<Edge> IGraph::Boruvka()
 	return result;
 }
 
-maxEdgeValue IGraph::getHeuristic(uint32_t vertexIndex)
+uint32_t IGraph::FordFulkerson(uint32_t source, uint32_t sink)
 {
-	return 0;	//NYI
+	uint32_t result=0;//maximum flow
+
+	std::unique_ptr<IGraph> residualGraph(clone());
+
+	return result;
+}
+
+maxEdgeValue IGraph::getHeuristic(uint32_t from, uint32_t to)
+{
+	if(coordinates)
+	return vector2::getDistance(coordinates[from], coordinates[to]);
+	else return 0;
 }
 
 IGraph::IGraph()

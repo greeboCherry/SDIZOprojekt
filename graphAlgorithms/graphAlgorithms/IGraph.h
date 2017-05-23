@@ -77,6 +77,7 @@ public:
 	//changes amount of vertices and ERASES all edges
 	virtual void resize(uint32_t targetSize) =0;
 	virtual void printMatrix() = 0;
+	virtual IGraph* clone()=0;
 	/*
 		Valid format:
 	1st line:				edgesNum vertixesNum
@@ -85,13 +86,16 @@ public:
 	bool loadGraphFromFileWithWages(std::string path);
 	//give density in 1-100, else it might not work. @onPlane decides if method should generate coordinates for vertices, required for heuristics of A*
 	void generateRandomGraph(uint8_t density, bool onPlane = 1);
+
 	//returns indexes of vertices creating shortest path
 	std::vector<uint32_t> AStar(uint32_t startIndex, uint32_t targetIndex);
 	//returns edges required to make a minimum spanning tree
 	std::vector<Edge> Boruvka();
+	//returns maximum flow from source to sink
+	uint32_t FordFulkerson(uint32_t source, uint32_t sink);
 
 	//helper function for A*
-	maxEdgeValue getHeuristic(uint32_t vertexIndex);
+	maxEdgeValue getHeuristic(uint32_t from, uint32_t to);
 
 	IGraph();
 	~IGraph();
