@@ -28,15 +28,16 @@ int main()
 	TestUnit testUnit;
 	testUnit.testG1Load();
 	testUnit.testG1AStar();
-	std::unique_ptr<IGraph> GM = std::make_unique<graphByMatrix>(10, true);
+	std::unique_ptr<IGraph> GM = std::make_unique<graphByMatrix>(100, true);
 	GM->generateRandomGraph(50, 1 );
-	GM->printMatrix();
+	//GM->printMatrix();
 
-// 	graphByMatrix  *G = new graphByMatrix(10);
-// 	std::map<uint32_t, maxEdgeValue> paths;
-// 
-// 	G->loadGraphFromFile("input/G1.txt");
-// 	G->printMatrix();
+ 	graphByMatrix  *G = new graphByMatrix(10);
+ 	std::map<uint32_t, maxEdgeValue> paths;
+
+	G->generateRandomGraph(50, false);
+	G->printMatrix();
+	G->Boruvka();
 // 	G->getPaths(0, paths);
 // 	for (auto it = paths.begin(); it != paths.end(); it++)
 // 	{

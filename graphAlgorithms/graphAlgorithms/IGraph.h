@@ -1,6 +1,7 @@
 #pragma once
 #include <stdint.h>
 #include <map>
+#include <vector>
 #include <list>
 #include <set>
 //#include "boost/heap/fibonacci_heap.hpp"
@@ -15,15 +16,32 @@ struct Edge
 	maxEdgeValue wage;
 	Edge(uint32_t fromV, uint32_t toV, maxEdgeValue wageV)
 	{
-		if (fromV>toV)
-		{
-			std::swap(fromV, toV);
-		}
+// 		if (fromV>toV)
+// 		{
+// 			std::swap(fromV, toV);
+// 		}
 		from = fromV;
 		to = toV;
 		wage = wageV;
 	}
+	friend inline bool operator<(const Edge& lhs, const Edge& rhs)
+	{
+		if (lhs.from<rhs.from)
+		{
+			return true;
+		}
+		else if (lhs.from>rhs.from)
+		{
+			return false;
+		}
+		else return(lhs.to < rhs.to);
+
+	}
+
+
 };
+
+
 
 struct vector2
 {
@@ -67,8 +85,10 @@ public:
 	bool loadGraphFromFileWithWages(std::string path);
 	//give density in 1-100, else it might not work. @onPlane decides if method should generate coordinates for vertices, required for heuristics of A*
 	void generateRandomGraph(uint8_t density, bool onPlane = 1);
-
-	std::list<uint32_t> AStar(uint32_t startIndex, uint32_t targetIndex);
+	//returns indexes of vertices creating shortest path
+	std::vector<uint32_t> AStar(uint32_t startIndex, uint32_t targetIndex);
+	//returns edges required to make a minimum spanning tree
+	std::vector<Edge> Boruvka();
 
 	//helper function for A*
 	maxEdgeValue getHeuristic(uint32_t vertexIndex);

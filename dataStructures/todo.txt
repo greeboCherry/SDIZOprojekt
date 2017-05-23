@@ -1,8 +1,8 @@
 d	resize
-	gen on plane //genning works, but could be tested more
+d	gen on plane
 d	list form
 	flow
-	Boruvka
+ip	Boruvka 
 
 	menu
 	

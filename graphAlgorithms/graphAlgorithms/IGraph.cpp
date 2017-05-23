@@ -5,7 +5,7 @@
 #include <vector>
 #include <utility>
 #include <limits>
-//#include "FiboHeap.h"
+#include <queue>
 
 bool IGraph::loadGraphFromFileWithWages(std::string path)
 {
@@ -18,7 +18,6 @@ bool IGraph::loadGraphFromFileWithWages(std::string path)
 	uint32_t fromV, toV, targetNumOfEdges;
 	maxEdgeValue wage;
 	file >> targetNumOfEdges >> amountOfVerticies;
-	
 	
 	for (uint32_t i = 0; i < targetNumOfEdges; i++)
 	{
@@ -117,9 +116,9 @@ struct VertexValue
 	
 };
 
-std::list<uint32_t> IGraph::AStar(uint32_t startIndex, uint32_t targetIndex)
+std::vector<uint32_t> IGraph::AStar(uint32_t startIndex, uint32_t targetIndex)
 {
-	std::list<uint32_t> path;
+	std::vector<uint32_t> path;
 	std::map<uint32_t, VertexValue> closed, open;//<indexNumber, f(n)=g(n)+h(n); closed holds those already checked, open - those not
 	std::map<uint32_t, maxEdgeValue> neighbours; //<indexNumber, cost from current V to vertex of given index
 	uint32_t currentIndex; //index to current vertex we are considering
@@ -145,12 +144,12 @@ std::list<uint32_t> IGraph::AStar(uint32_t startIndex, uint32_t targetIndex)
 		{
 			if (n.first == targetIndex)	//If the node is the goal node, set its parent to the current node and store the final path.
 			{
-				path.push_front(targetIndex);
-				path.push_front(currentIndex);
+				path.push_back(targetIndex);
+				path.push_back(currentIndex);
 				do 
 				{
 					currentIndex = closed.at(currentIndex).from;
-					path.push_front(currentIndex);
+					path.push_back(currentIndex);
 				} while (currentIndex!=startIndex);
 				return path;
 			}
@@ -178,6 +177,102 @@ std::list<uint32_t> IGraph::AStar(uint32_t startIndex, uint32_t targetIndex)
 	}
 
 	return path;
+}
+//it exists purely for Boruvka's sake, really
+struct b_Tree
+{
+	
+	std::set<uint32_t> verticesIncluded;
+	std::set<Edge> edgesInlcuded;
+	b_Tree(uint32_t initialVertex) { verticesIncluded.emplace(initialVertex); }
+	
+
+	void merge(b_Tree& other)
+	{
+		for each (auto e in other.edgesInlcuded)
+		{
+			edgesInlcuded.emplace(e);
+		}
+		for each (auto v in other.verticesIncluded)
+		{
+			verticesIncluded.emplace(v);
+		}
+
+	}
+
+	//helper function for Boruvka
+	bool containsVertex(uint32_t vertexIndex)
+	{
+
+		auto it = verticesIncluded.find(vertexIndex);
+		return (it != verticesIncluded.end());
+	}
+};
+auto comp = [](Edge& a, Edge& b) { return a.wage > b.wage; };//comparator for min heap for Boruvka
+
+
+std::vector<Edge> IGraph::Boruvka()
+{
+	std::map<uint32_t, maxEdgeValue> neigbours;
+
+	//1.Initialize a forest T to be a set of one - vertex trees, one for each vertex of the graph.
+	std::list<b_Tree> forest;
+		for (uint32_t i = 0; i < amountOfVerticies;i++)
+	{
+		forest.push_back(b_Tree(i));
+
+	}
+	while (forest.size()>3) //2.   While T has more than one component:
+	{
+		for (auto currentTree = forest.rbegin(); currentTree != forest.rend(); currentTree++)
+		/*for each (auto currentTree in forest)*/
+		{
+			std::priority_queue<Edge, std::vector<Edge>, decltype(comp)> queue(comp);
+			for each (uint32_t indexNumer in currentTree->verticesIncluded)
+			{
+				getPaths(indexNumer, neigbours);	
+				for each (auto path in neigbours)
+				{
+					queue.push(Edge(indexNumer, path.first, path.second));
+				}
+			} 
+			//now we have all edges of subtree in queue
+			bool merged = 0;//flag
+			while (!queue.empty()&&!merged) 
+			{
+				Edge currentEdge = queue.top();
+				//if the cheapest edge leads outside of current tree - merge!
+				if (currentTree->verticesIncluded.find(currentEdge.to) == currentTree->verticesIncluded.end())
+				{
+							//TODO try using std::find_if
+					
+					for (auto it = forest.rbegin(); it != forest.rend(); it++)
+					{
+					
+						if (it->containsVertex(currentEdge.to))
+						{
+							it->merge(*currentTree);
+							
+							forest.erase(std::next(currentTree).base());	//zamiana reverse iteratora na zwyk³y i erase
+							//add new edge
+							merged = 1;
+
+							break;
+						}
+						
+					}
+				}
+				queue.pop();	//else drop it and we'll try next one
+
+			}
+		}
+		std::cout << "Boruvka iteration" << std::endl;
+	}
+
+	std::vector<Edge> result;
+	result.size();
+//	forest[0].edgesInlcuded;
+	return result;
 }
 
 maxEdgeValue IGraph::getHeuristic(uint32_t vertexIndex)
