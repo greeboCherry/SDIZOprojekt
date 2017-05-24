@@ -67,7 +67,11 @@ void graphByMatrix::getPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &
 
 IGraph* graphByMatrix::clone()
 {
-	return new graphByMatrix(*this);
+	graphByMatrix* newMatrix = new graphByMatrix(this->amountOfVerticies, directed);
+	newMatrix->edges = new maxEdgeValue[amountOfVerticies*amountOfVerticies];
+	memcpy(newMatrix->edges, edges, amountOfVerticies*amountOfVerticies*sizeof(maxEdgeValue));
+	return newMatrix;
+//	return new graphByMatrix(*this);
 }
 
 maxEdgeValue graphByMatrix::getPath(uint32_t from, uint32_t to)

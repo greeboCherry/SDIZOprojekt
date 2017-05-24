@@ -4,6 +4,7 @@
 #include "graphByMatrix.h"
 #include "graphByList.h"
 #include "TestUnit.h"
+#include "Menu.h"
 #include <memory>
 
 /*
@@ -26,13 +27,16 @@
 int main()
 {
 	TestUnit testUnit;
-	testUnit.testG1Load();
-	testUnit.testG1AStar();
-	testUnit.testRandomAStar();
-	testUnit.testRandomBoruvka();
-	testUnit.testRandomFF();
-	
-	
+	for (uint32_t i = 0; i < 1;i++)
+	{
+		testUnit.testG1Load();
+		testUnit.testG1AStar();
+		testUnit.testRandomAStar();
+		testUnit.testRandomBoruvka();
+		testUnit.testRandomFF();
+	}
+	std::unique_ptr<Menu> menu = std::make_unique<Menu>();
+	menu->mainMenu();
 	//std::unique_ptr<IGraph> GM = std::make_unique<graphByMatrix>(100, true);
 
 

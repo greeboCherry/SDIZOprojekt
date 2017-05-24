@@ -13,7 +13,7 @@
 bool IGraph::loadGraphFromFileWithWages(std::string path)
 {
 	std::fstream file(path, std::fstream::in);
-	if (!file)
+	if (!file||!file.good())
 	{
 		std::cout << "Couldn't open file at: " << path.c_str() << std::endl;
 		return false;
@@ -38,7 +38,7 @@ void IGraph::generateRandomGraph(uint8_t density, bool onPlane)
 	 delete[] coordinates;
 	if (onPlane)
 	{
-		maxEdgeValue maxCoord = std::numeric_limits<maxEdgeValue>::max();
+		maxEdgeValue maxCoord = std::numeric_limits<maxEdgeValue>::max()/4;
 		coordinates = new vector2[amountOfVerticies];
 		for (uint32_t i = 0; i < amountOfVerticies;i++)
 		{
@@ -294,22 +294,11 @@ std::vector<Edge> IGraph::Boruvka()
 bool IGraph::findRoute(uint32_t from, uint32_t to, std::vector<int32_t> &routingTable)
 {
 	std::vector<bool> visited;
-//	visited.resize(amountOfVerticies, false);
-
-	;
-
+	visited.resize(amountOfVerticies, false);
 	std::queue<uint32_t> q;
 	
-	;
-	
 	q.push(from);//queue for throwing vertices through
-	
-	;
-	
 	visited.at(from) = true;
-
-	;
-
 	routingTable[from] = -1;
 
 	while (!q.empty())
