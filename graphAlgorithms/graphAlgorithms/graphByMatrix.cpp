@@ -70,3 +70,25 @@ IGraph* graphByMatrix::clone()
 	return new graphByMatrix(*this);
 }
 
+maxEdgeValue graphByMatrix::getPath(uint32_t from, uint32_t to)
+{
+	return edges[to*amountOfVerticies + from];
+}
+
+void graphByMatrix::modifyPath(uint32_t from, uint32_t to, int32_t deltaValue)
+{
+	if (edges[to*amountOfVerticies + from] > 0)
+		edges[to*amountOfVerticies + from] += deltaValue;
+	else
+		//		throw std::logic_error("there is no such edge");
+		edges[to*amountOfVerticies + from] = 0;
+}
+
+/*
+	T  O
+F X X X X
+R X X X X
+O X X X X
+M X X X X
+(x,y)=[x * width + y]
+*/

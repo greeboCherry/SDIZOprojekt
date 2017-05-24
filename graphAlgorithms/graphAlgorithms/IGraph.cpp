@@ -8,6 +8,8 @@
 #include <queue>
 #include <memory>
 
+
+
 bool IGraph::loadGraphFromFileWithWages(std::string path)
 {
 	std::fstream file(path, std::fstream::in);
@@ -220,7 +222,7 @@ std::vector<Edge> IGraph::Boruvka()
 
 	//1.Initialize a forest T to be a set of one - vertex trees, one for each vertex of the graph.
 	std::list<b_Tree> forest;
-		for (uint32_t i = 0; i < amountOfVerticies;i++)
+	for (uint32_t i = 0; i < amountOfVerticies; i++)
 	{
 		forest.push_back(b_Tree(i));
 
@@ -228,35 +230,35 @@ std::vector<Edge> IGraph::Boruvka()
 	do  //2.   While T has more than one component:
 	{
 		for (auto currentTree = forest.begin(); currentTree != forest.end(); /*no increment here because of if in body*/)
-		/*for each (auto currentTree in forest)*/
+			/*for each (auto currentTree in forest)*/
 		{
 			std::priority_queue<Edge, std::vector<Edge>, decltype(comp)> queue(comp);
 			for each (uint32_t indexNumber in currentTree->verticesIncluded)
 			{
-				getPaths(indexNumber, neigbours);	
+				getPaths(indexNumber, neigbours);
 				for each (auto path in neigbours)
 				{
 					queue.push(Edge(indexNumber, path.first, path.second));
 				}
-			} 
+			}
 			//now we have all edges of subtree in queue
 			bool merged = 0;//flag
-			while (!queue.empty()&&!merged) 
+			while (!queue.empty() && !merged)
 			{
 				Edge currentEdge = queue.top();
 				//if the cheapest edge leads outside of current tree - merge!
 				if (currentTree->verticesIncluded.find(currentEdge.to) == currentTree->verticesIncluded.end())
 				{
-							//TODO try using std::find_if
-					
+					//TODO try using std::find_if
+
 					for (auto it = forest.begin(); it != forest.end(); it++)
 					{
-// 						//debug
-// 						for (auto itd = forest.begin(); itd != forest.end(); itd++)
-// 						{
-// 							std::cout << std::addressof(*itd) << std::endl;
-// 						}
-// 						//end of debug
+						// 						//debug
+						// 						for (auto itd = forest.begin(); itd != forest.end(); itd++)
+						// 						{
+						// 							std::cout << std::addressof(*itd) << std::endl;
+						// 						}
+						// 						//end of debug
 						if (it->containsVertex(currentEdge.to))
 						{
 							if (it == currentTree)	//should not be here, anyway, it can crash without coming here
@@ -269,9 +271,9 @@ std::vector<Edge> IGraph::Boruvka()
 
 							break;
 						}
-					//	else
-					//		currentTree++;//iterating both at once or sth?
-						
+						//	else
+						//		currentTree++;//iterating both at once or sth?
+
 					}
 				}
 				queue.pop();	//else drop it and we'll try next one
@@ -283,17 +285,86 @@ std::vector<Edge> IGraph::Boruvka()
 		std::cout << "Boruvka iteration" << std::endl;
 	} while (forest.size() > 1);
 
-	
+
 	result.size(); //todo: put sth here
 //	forest[0].edgesInlcuded;
 	return result;
 }
+
+bool IGraph::findRoute(uint32_t from, uint32_t to, std::vector<int32_t> &routingTable)
+{
+	std::vector<bool> visited;
+//	visited.resize(amountOfVerticies, false);
+
+	;
+
+	std::queue<uint32_t> q;
+	
+	;
+	
+	q.push(from);//queue for throwing vertices through
+	
+	;
+	
+	visited.at(from) = true;
+
+	;
+
+	routingTable[from] = -1;
+
+	while (!q.empty())
+	{
+		uint32_t currentVertex = q.front();
+		q.pop();
+		std::map<uint32_t, maxEdgeValue> neighbours;
+		getPaths(currentVertex, neighbours);
+		for each (auto n in neighbours)
+		{
+			if (!visited[n.first])
+			{
+				q.push(n.first);
+				routingTable[n.first] = currentVertex;
+				visited[n.first] = true;
+			}
+		}
+	}
+
+	return (visited[to]); //return if path between verticies exists
+}
+
 
 uint32_t IGraph::FordFulkerson(uint32_t source, uint32_t sink)
 {
 	uint32_t result=0;//maximum flow
 
 	std::unique_ptr<IGraph> residualGraph(clone());
+
+	std::vector<int32_t> routingTable;
+	routingTable.resize(amountOfVerticies, 0);
+	//find next route
+	while (residualGraph->findRoute(source, sink, routingTable))
+	{
+		int32_t flow = std::numeric_limits<int32_t>::max();
+		uint32_t currentVertex = sink;
+		uint32_t temp;//we need two vertices to get paths, right?
+		//backtrack and find flow from that route
+		while (currentVertex != source)
+		{
+			temp = routingTable[currentVertex];
+			flow = std::min(flow, (int32_t)residualGraph->getPath(currentVertex, temp));
+			currentVertex = temp;
+		}
+		//backtrack again and update cost of all edges along
+		currentVertex = sink;
+		while (currentVertex != source)
+		{
+			temp = routingTable[currentVertex];
+			residualGraph->modifyPath(currentVertex, temp, -flow);
+			residualGraph->modifyPath(temp, currentVertex, -flow);
+			currentVertex = temp;
+		}
+		result += flow;
+	}
 
 	return result;
 }

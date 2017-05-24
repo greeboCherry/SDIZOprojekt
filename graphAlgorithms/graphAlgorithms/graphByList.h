@@ -18,5 +18,13 @@ public:
 	virtual void printMatrix() override;
 	virtual IGraph* clone() override;
 
+
+	// Inherited via IGraph
+	virtual maxEdgeValue getPath(uint32_t from, uint32_t to) override;
+
+
+	// Inherited via IGraph
+	virtual void modifyPath(uint32_t from, uint32_t to, int32_t deltaValue) override;
+
 };
 

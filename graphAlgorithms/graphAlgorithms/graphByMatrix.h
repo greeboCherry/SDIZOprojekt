@@ -18,6 +18,7 @@ public:
 	uint32_t getNumVerticies() const { return amountOfVerticies; }
 	graphByMatrix(uint32_t verts, bool directional=false);
 	graphByMatrix(const graphByMatrix& other);
+	~graphByMatrix() { delete[]edges; }
 
 	void printMatrix();	//print NxN rows representing edges
 	/*
@@ -32,5 +33,11 @@ public:
 	// Inherited via IGraph
 	virtual void getPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &neighbours) override;
 	virtual IGraph* clone() override;
+
+	// Inherited via IGraph
+	virtual maxEdgeValue getPath(uint32_t from, uint32_t to) override;
+
+	// Inherited via IGraph
+	virtual void modifyPath(uint32_t from, uint32_t to, int32_t deltaValue) override;
 };
 

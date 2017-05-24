@@ -1,5 +1,6 @@
 #include "graphByList.h"
 #include <iostream>
+#include <stdexcept>
 graphByList::graphByList(uint32_t verts, bool directional/*=false*/)
 {
 	this->directed = directional;
@@ -65,4 +66,27 @@ IGraph* graphByList::clone()
 // 	return copy;
 	//return new graphByList(static_cast<const graphByList&> (*this));
 	return new graphByList(*this);
+}
+
+maxEdgeValue graphByList::getPath(uint32_t from, uint32_t to)
+{
+	auto it = vertices->at(from).find(to);
+	if (it != vertices->at(from).end())
+		return it->second;
+	else
+		throw std::logic_error("there is no such edge");
+
+}
+
+void graphByList::modifyPath(uint32_t from, uint32_t to, int32_t deltaValue)
+{
+	auto it=	vertices->at(from).find(to);
+	if (it != vertices->at(from).end())
+	{
+		it->second += deltaValue;
+		if (it->second == 0)
+			vertices->at(from).erase(it);
+	}
+	else
+		throw std::logic_error("there is no such edge");
 }

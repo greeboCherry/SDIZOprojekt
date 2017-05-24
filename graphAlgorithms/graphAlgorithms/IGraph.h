@@ -73,6 +73,8 @@ public:
 	 @neighbours - < wage of edge to vertex, vertex index>	 */
 	virtual void getPaths(uint32_t vertex, std::map<uint32_t, maxEdgeValue> &neighbours) = 0;
 	//adds edge between vertices of given indexes, with given wage, edge will be directed based on "directed" member variable
+	virtual maxEdgeValue getPath(uint32_t from, uint32_t to) = 0;
+	virtual void modifyPath(uint32_t from, uint32_t to, int32_t deltaValue)=0;
 	virtual void addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage = 1) = 0;
 	//changes amount of vertices and ERASES all edges
 	virtual void resize(uint32_t targetSize) =0;
@@ -93,6 +95,9 @@ public:
 	std::vector<Edge> Boruvka();
 	//returns maximum flow from source to sink
 	uint32_t FordFulkerson(uint32_t source, uint32_t sink);
+
+	//helper function for FF, uses Breadth-first search
+	bool findRoute(uint32_t from, uint32_t to, std::vector<int32_t> &routingTable);
 
 	//helper function for A*
 	maxEdgeValue getHeuristic(uint32_t from, uint32_t to);

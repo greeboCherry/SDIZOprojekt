@@ -3,9 +3,9 @@
 #include "graphByMatrix.h"
 #include <memory>
 
-using graphType = graphByList;
+//using graphType = graphByList;
 
-//using graphType = graphByMatrix;
+using graphType = graphByMatrix;
 
 void TestUnit::testG1Load()
 {
