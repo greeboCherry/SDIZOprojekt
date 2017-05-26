@@ -1,11 +1,52 @@
 #include "TestUnit.h"
 #include "graphByList.h"
 #include "graphByMatrix.h"
+#include <fstream>
 #include <memory>
+#include <chrono>
+#include <iomanip>
+#include <ctime>
+#include <chrono>
+#include <windows.h>
 
 using graphType = graphByList;
 
 //using graphType = graphByMatrix;
+
+void TestUnit::saveToFile(std::string fileName, std::string textContent)
+{
+	fileName = "output/" + fileName + ".txt";
+
+
+	textContent = textContent +"\n";
+	std::ofstream outfile(fileName, std::ofstream::out | std::ofstream::app);	//app starts writing at the end of file, out overwrites it
+	if (outfile.is_open())
+	{
+		outfile.write(textContent.c_str(), textContent.size());
+		outfile.close();
+	}
+	else
+		std::cout << "Couldn't create file. Make sure that there is <output> folder in exe location.\nYour results\n" << textContent << std::endl;
+}
+
+void TestUnit::StartCounter()
+{
+	LARGE_INTEGER li;
+	if (!QueryPerformanceFrequency(&li))
+		printf("QueryPerformanceFrequency failed!\n");
+
+	PCFreq = double(li.QuadPart) / 1000.0;
+
+	QueryPerformanceCounter(&li);
+	CounterStart = li.QuadPart;
+}
+double TestUnit::GetCounter()
+{
+	LARGE_INTEGER li;
+	QueryPerformanceCounter(&li);
+	return double(li.QuadPart - CounterStart) / PCFreq;
+}
+
 
 void TestUnit::testG1Load()
 {
@@ -93,3 +134,98 @@ void TestUnit::testRandomFF()
 	auto r = G->FordFulkerson(0, 4);
 	std::cout << "testRandomFF didn't crash" << std::endl;
 }
+
+void TestUnit::testAndMeasure(uint32_t startSize/*=100*/, uint32_t endSize/*=1000*/, uint32_t deltaSize/*=100*/, uint32_t testCount /*= */)
+{
+	  auto gL= std::make_unique<graphByList>(1, false);
+	  auto gM = std::make_unique<graphByMatrix>(1, false);
+	  std::vector<Edge> edgeResult;
+
+	  double Lresult, Mresult, LBresult, MBresult, LAresult, MAresult, LFFresult, MFFresult;
+	std::string message;
+
+	for (uint32_t vertexCount = startSize; vertexCount <= endSize; vertexCount+=deltaSize)
+	{
+		std::cout << "Running in the " << vertexCount << "'s\n";
+		for (uint8_t density = 25; density <= 100;density+=25)
+		{//Boruvka, A*, Ford-Fulkerson
+			LBresult = MBresult = LAresult = MAresult = LFFresult = MFFresult = 0;
+			for (uint8_t t = 0; t < testCount; t++)
+			{
+			StartCounter();
+			gL->resize(vertexCount);
+			gL->generateRandomGraph(density);
+			Lresult = GetCounter();
+			message = "Generation for List type graph\t" + std::to_string(vertexCount) + "\tvertices and\t" + std::to_string(density) + "\t density took\t" + std::to_string(Lresult) + "\tms";
+			saveToFile("ListGeneration", message);
+			StartCounter();
+			gM->resize(vertexCount);
+			gM->generateRandomGraph(density);
+			Mresult = GetCounter();
+			message = "Generation of Matrix type graph \t" + std::to_string(vertexCount) + "\tvertices and\t" + std::to_string(density) + "\t density took\t" + std::to_string(Mresult) + "\tms";
+			saveToFile("MatrixGeneration", message);
+
+			StartCounter();
+			gM->Boruvka();
+			MBresult += GetCounter();
+			StartCounter();
+			edgeResult=gL->Boruvka();
+			LBresult += GetCounter();
+			
+			StartCounter();
+			gM->AStar(0, vertexCount/2);
+			MAresult += GetCounter();
+			StartCounter();
+			gL->AStar(0, vertexCount / 2);;
+			LAresult += GetCounter();
+
+			StartCounter();
+			gM->FordFulkerson(0, vertexCount / 2);
+			MFFresult += GetCounter();
+			StartCounter();
+			gL->FordFulkerson(0, vertexCount / 2);;
+			LFFresult += GetCounter();
+
+			}//end of testCount loop
+//Boruvka write
+			MBresult /= testCount;
+			message = "Boruvka for Matrix type graph \t" + std::to_string(vertexCount) + "\tvertices and\t" + std::to_string(density) + "\t density took\t"
+				+ std::to_string(MBresult) + "\tms";
+			saveToFile("MatrixBoruvka", message);
+
+			LBresult /= testCount;
+			message = "Boruvka for List type graph \t" + std::to_string(vertexCount) + "\tvertices and\t" + std::to_string(density) + "\t density took\t"
+				+ std::to_string(LBresult) + "\tms";
+			saveToFile("ListBoruvka", message);
+//AStar write
+			MAresult /= testCount;
+			message = "AStar for Matrix type graph \t" + std::to_string(vertexCount) + "\tvertices and\t" + std::to_string(density) + "\t density took\t"
+				+ std::to_string(MAresult) + "\tms";
+			saveToFile("MatrixAStar", message);
+
+			LAresult /= testCount;
+			message = "AStar for List type graph \t" + std::to_string(vertexCount) + "\tvertices and\t" + std::to_string(density) + "\t density took\t"
+				+ std::to_string(LAresult) + "\tms";
+			saveToFile("ListAStar", message);
+
+//Ford-Fulkerson write
+			MFFresult /= testCount;
+			message = "Ford-Fulkerson for Matrix type graph \t" + std::to_string(vertexCount) + "\tvertices and\t" + std::to_string(density) + "\t density took\t"
+				+ std::to_string(MFFresult) + "\tms";
+			saveToFile("MatrixFF", message);
+
+			LFFresult /= testCount;
+			message = "Ford-Fulkerson for List type graph \t" + std::to_string(vertexCount) + "\tvertices and\t" + std::to_string(density) + "\t density took\t"
+				+ std::to_string(LFFresult) + "\tms";
+			saveToFile("LisFF", message);
+
+		}
+	}
+// 
+// 	resultString = "Raw init and deletion to\t\t\t\t " + std::to_string(gold->getSize()) +
+// 		"\telements:\t" + std::to_string(operationTime) + "\tms\t" +
+// 		"Test parameters: max value " + std::to_string(maxValue) + " ,min value " + std::to_string(minValue) +
+// 		" ,insert value" + std::to_string(insertValue) + "\t\n";
+
+}
+

@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include "graphByList.h"
 #include "graphByMatrix.h"
+#include "TestUnit.h"
 #include <string>
 #include <iostream>
 
@@ -43,6 +44,7 @@ void Menu::mainMenu()
 		"3 - A*\n"
 		"4 - Boruvka \n\n"
 		"5 - Ford-Fulkerson"
+		"9 - run all tests"
 		"0 - Exit\n";
 
 	while (true)
@@ -74,7 +76,10 @@ void Menu::mainMenu()
 			do{
 				std::cout << std::endl << "Choose representation. 1 - by List, 2 - by Matrix: ";
 				std::cin >> sub_choice;
+			} while (sub_choice != '1'&&sub_choice != '2');
 				
+			graph.release();
+
 				switch (sub_choice)
 				{
 				case '1': graph = std::make_unique<graphByList>(vertices, directional);
@@ -86,7 +91,7 @@ void Menu::mainMenu()
 					break;
 				}
 
-			} while (sub_choice!='1'&&sub_choice!='2');
+			
 			graph->generateRandomGraph(density, onPlane);
 			graph->printMatrix();
 			break;
@@ -143,12 +148,21 @@ void Menu::mainMenu()
 
 			break;
 		
-		case '6':
+		case '6'://read from file
 
 			if (graph->loadGraphFromFileWithWages("input/G2.txt"))
 				graph->printMatrix();
 			else
 				std::cout << "ERROR";
+			break;
+		case '9'://run all the tests
+		{
+			auto testUnit = std::make_unique<TestUnit>();
+			testUnit->testAndMeasure();
+		}
+			break;
+
+
 		
 		case '0': //Exit
 			exit(0);

@@ -5,7 +5,7 @@
 class graphByList :	public IGraph
 {
 	//each vertex[index] keeps map of vertices in has connection(first) and cost of those(second)
-	std::unique_ptr<	std::vector < std::map<uint32_t, maxEdgeValue>> >  vertices; 
+	std::vector < std::map<uint32_t, maxEdgeValue>>  vertices; 
 public:
 	graphByList(uint32_t verts, bool directional=false);
 	graphByList(const graphByList& other);

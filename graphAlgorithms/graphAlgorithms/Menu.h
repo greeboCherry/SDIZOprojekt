@@ -9,7 +9,7 @@ public:
 	Menu();
 	~Menu();
 	void mainMenu();
-	void MSTMenu();
-	void pathsMenu();
+//	void MSTMenu();
+//	void pathsMenu();
 };
 

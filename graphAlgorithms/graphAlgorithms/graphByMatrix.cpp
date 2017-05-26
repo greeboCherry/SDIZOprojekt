@@ -49,6 +49,7 @@ void graphByMatrix::addEdge(uint32_t fromV, uint32_t toV, maxEdgeValue wage/*=1*
 void graphByMatrix::resize(uint32_t targetSize)
 {
 	delete[] edges;
+	delete[] coordinates;
 	edges = new maxEdgeValue[targetSize*targetSize];
 	amountOfVerticies = targetSize;
 	memset(edges, -1, sizeof(maxEdgeValue)*amountOfVerticies*amountOfVerticies);	//set all edges at:doesn't exist

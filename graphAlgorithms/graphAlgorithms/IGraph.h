@@ -103,6 +103,6 @@ public:
 	maxEdgeValue getHeuristic(uint32_t from, uint32_t to);
 
 	IGraph();
-	~IGraph();
+	virtual ~IGraph();
 };
 

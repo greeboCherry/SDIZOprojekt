@@ -35,7 +35,7 @@ void IGraph::generateRandomGraph(uint8_t density, bool onPlane)
 {
 	uint32_t minRand=0;
 	uint32_t maxRand= std::numeric_limits<uint32_t>::max()/2;
-	 delete[] coordinates;
+	// delete[] coordinates;
 	if (onPlane)
 	{
 		maxEdgeValue maxCoord = std::numeric_limits<maxEdgeValue>::max()/4;
@@ -282,7 +282,7 @@ std::vector<Edge> IGraph::Boruvka()
 			if (forest.size() == 1)
 				break;
 		}
-		std::cout << "Boruvka iteration" << std::endl;
+		//std::cout << "Boruvka iteration" << std::endl;
 	} while (forest.size() > 1);
 
 
@@ -324,7 +324,7 @@ bool IGraph::findRoute(uint32_t from, uint32_t to, std::vector<int32_t> &routing
 
 uint32_t IGraph::FordFulkerson(uint32_t source, uint32_t sink)
 {
-	uint32_t result=0;//maximum flow
+	volatile uint32_t result=0;//maximum flow
 
 	std::unique_ptr<IGraph> residualGraph(clone());
 
@@ -334,8 +334,8 @@ uint32_t IGraph::FordFulkerson(uint32_t source, uint32_t sink)
 	while (residualGraph->findRoute(source, sink, routingTable))
 	{
 		int32_t flow = std::numeric_limits<int32_t>::max();
-		uint32_t currentVertex = sink;
-		uint32_t temp;//we need two vertices to get paths, right?
+		volatile uint32_t currentVertex = sink;
+		volatile uint32_t temp;//we need two vertices to get paths, right?
 		//backtrack and find flow from that route
 		while (currentVertex != source)
 		{
@@ -372,5 +372,5 @@ IGraph::IGraph()
 
 IGraph::~IGraph()
 {
-	delete[] coordinates;
+	//delete[] coordinates;
 }

@@ -18,7 +18,7 @@ public:
 	uint32_t getNumVerticies() const { return amountOfVerticies; }
 	graphByMatrix(uint32_t verts, bool directional=false);
 	graphByMatrix(const graphByMatrix& other);
-	~graphByMatrix() { delete[]edges; }
+	~graphByMatrix() { delete[]edges; delete[] coordinates; }
 
 	void printMatrix();	//print NxN rows representing edges
 	/*
