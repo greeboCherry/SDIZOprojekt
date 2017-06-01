@@ -1,0 +1,14 @@
+struktura elemtentu(rozmiar i wartoœæ)
+struktura plecaka(pojemnoœæ)
+
+algorytmy do plecaka
+prezgl¹d zupe³ny
+algorytm zach³anny
+algorytm opartny na programowaniu dynamicznym????
+
+read from file
+
+pomiar czasu
+
+algorytmy do Komi
+d zupe³ny, e zach³anny, f... algorytm przeszukiwania lokalnego

@@ -1,0 +1,13 @@
+Ford-Fulkerson for Matrix type graph 	100	vertices and	25	 density took	592.853619	ms
+Ford-Fulkerson for Matrix type graph 	100	vertices and	50	 density took	2238.701218	ms
+Ford-Fulkerson for Matrix type graph 	100	vertices and	75	 density took	4667.220409	ms
+Ford-Fulkerson for Matrix type graph 	100	vertices and	100	 density took	7564.276363	ms
+Ford-Fulkerson for Matrix type graph 	200	vertices and	25	 density took	4776.968732	ms
+Ford-Fulkerson for Matrix type graph 	200	vertices and	50	 density took	18830.425580	ms
+Ford-Fulkerson for Matrix type graph 	200	vertices and	75	 density took	43163.680726	ms
+Ford-Fulkerson for Matrix type graph 	200	vertices and	100	 density took	9519.478719	ms
+Ford-Fulkerson for Matrix type graph 	300	vertices and	25	 density took	532.914479	ms
+Ford-Fulkerson for Matrix type graph 	300	vertices and	25	 density took	18246.191631	ms
+Ford-Fulkerson for Matrix type graph 	300	vertices and	50	 density took	65975.096286	ms
+Ford-Fulkerson for Matrix type graph 	300	vertices and	75	 density took	141528.473279	ms
+Ford-Fulkerson for Matrix type graph 	300	vertices and	100	 density took	234485.087191	ms

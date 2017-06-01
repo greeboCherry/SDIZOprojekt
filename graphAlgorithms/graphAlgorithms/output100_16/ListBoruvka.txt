@@ -1,0 +1,13 @@
+Boruvka for List type graph 	100	vertices and	25	 density took	162.722919	ms
+Boruvka for List type graph 	100	vertices and	50	 density took	164.775766	ms
+Boruvka for List type graph 	100	vertices and	75	 density took	161.737294	ms
+Boruvka for List type graph 	100	vertices and	100	 density took	159.024820	ms
+Boruvka for List type graph 	200	vertices and	25	 density took	913.254160	ms
+Boruvka for List type graph 	200	vertices and	50	 density took	932.513205	ms
+Boruvka for List type graph 	200	vertices and	75	 density took	1075.315395	ms
+Boruvka for List type graph 	200	vertices and	100	 density took	152.096215	ms
+Boruvka for List type graph 	300	vertices and	25	 density took	165.714696	ms
+Boruvka for List type graph 	300	vertices and	25	 density took	2629.570268	ms
+Boruvka for List type graph 	300	vertices and	50	 density took	2185.679018	ms
+Boruvka for List type graph 	300	vertices and	75	 density took	2161.948836	ms
+Boruvka for List type graph 	300	vertices and	100	 density took	3219.949187	ms

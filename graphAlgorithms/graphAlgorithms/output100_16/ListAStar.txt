@@ -1,0 +1,13 @@
+AStar for List type graph 	100	vertices and	25	 density took	0.838314	ms
+AStar for List type graph 	100	vertices and	50	 density took	0.832377	ms
+AStar for List type graph 	100	vertices and	75	 density took	0.805715	ms
+AStar for List type graph 	100	vertices and	100	 density took	0.782475	ms
+AStar for List type graph 	200	vertices and	25	 density took	1.632470	ms
+AStar for List type graph 	200	vertices and	50	 density took	1.621058	ms
+AStar for List type graph 	200	vertices and	75	 density took	1.800096	ms
+AStar for List type graph 	200	vertices and	100	 density took	0.280941	ms
+AStar for List type graph 	300	vertices and	25	 density took	0.128742	ms
+AStar for List type graph 	300	vertices and	25	 density took	2.517227	ms
+AStar for List type graph 	300	vertices and	50	 density took	2.324270	ms
+AStar for List type graph 	300	vertices and	75	 density took	2.327965	ms
+AStar for List type graph 	300	vertices and	100	 density took	3.313756	ms

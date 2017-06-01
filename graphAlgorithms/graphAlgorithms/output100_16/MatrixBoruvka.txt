@@ -1,0 +1,13 @@
+Boruvka for Matrix type graph 	100	vertices and	25	 density took	63.536032	ms
+Boruvka for Matrix type graph 	100	vertices and	50	 density took	115.811237	ms
+Boruvka for Matrix type graph 	100	vertices and	75	 density took	166.173431	ms
+Boruvka for Matrix type graph 	100	vertices and	100	 density took	217.124211	ms
+Boruvka for Matrix type graph 	200	vertices and	25	 density took	266.953518	ms
+Boruvka for Matrix type graph 	200	vertices and	50	 density took	500.297694	ms
+Boruvka for Matrix type graph 	200	vertices and	75	 density took	828.898391	ms
+Boruvka for Matrix type graph 	200	vertices and	100	 density took	148.726648	ms
+Boruvka for Matrix type graph 	300	vertices and	25	 density took	43.353469	ms
+Boruvka for Matrix type graph 	300	vertices and	25	 density took	1013.514162	ms
+Boruvka for Matrix type graph 	300	vertices and	50	 density took	1271.308118	ms
+Boruvka for Matrix type graph 	300	vertices and	75	 density took	1819.500810	ms
+Boruvka for Matrix type graph 	300	vertices and	100	 density took	3573.818978	ms

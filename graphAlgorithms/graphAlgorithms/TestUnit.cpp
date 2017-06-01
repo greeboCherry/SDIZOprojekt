@@ -144,6 +144,8 @@ void TestUnit::testAndMeasure(uint32_t startSize/*=100*/, uint32_t endSize/*=100
 	  double Lresult, Mresult, LBresult, MBresult, LAresult, MAresult, LFFresult, MFFresult;
 	std::string message;
 
+	const uint8_t FFlimit = 16;
+
 	for (uint32_t vertexCount = startSize; vertexCount <= endSize; vertexCount+=deltaSize)
 	{
 		std::cout << "Running in the " << vertexCount << "'s\n";
@@ -179,12 +181,14 @@ void TestUnit::testAndMeasure(uint32_t startSize/*=100*/, uint32_t endSize/*=100
 			gL->AStar(0, vertexCount / 2);;
 			LAresult += GetCounter();
 
-			StartCounter();
-			gM->FordFulkerson(0, vertexCount / 2);
-			MFFresult += GetCounter();
-			StartCounter();
-			gL->FordFulkerson(0, vertexCount / 2);;
-			LFFresult += GetCounter();
+				
+					StartCounter();
+					gM->FordFulkerson(0, vertexCount / 2);
+					MFFresult += GetCounter();
+					StartCounter();
+					gL->FordFulkerson(0, vertexCount / 2);;
+					LFFresult += GetCounter();
+				
 
 			}//end of testCount loop
 //Boruvka write
@@ -209,12 +213,12 @@ void TestUnit::testAndMeasure(uint32_t startSize/*=100*/, uint32_t endSize/*=100
 			saveToFile("ListAStar", message);
 
 //Ford-Fulkerson write
-			MFFresult /= testCount;
+			MFFresult /= FFlimit;
 			message = "Ford-Fulkerson for Matrix type graph \t" + std::to_string(vertexCount) + "\tvertices and\t" + std::to_string(density) + "\t density took\t"
 				+ std::to_string(MFFresult) + "\tms";
 			saveToFile("MatrixFF", message);
 
-			LFFresult /= testCount;
+			LFFresult /= FFlimit;
 			message = "Ford-Fulkerson for List type graph \t" + std::to_string(vertexCount) + "\tvertices and\t" + std::to_string(density) + "\t density took\t"
 				+ std::to_string(LFFresult) + "\tms";
 			saveToFile("LisFF", message);

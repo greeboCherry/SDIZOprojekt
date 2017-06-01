@@ -1,0 +1,13 @@
+Ford-Fulkerson for List type graph 	100	vertices and	25	 density took	9802.708226	ms
+Ford-Fulkerson for List type graph 	100	vertices and	50	 density took	10266.842832	ms
+Ford-Fulkerson for List type graph 	100	vertices and	75	 density took	10191.647317	ms
+Ford-Fulkerson for List type graph 	100	vertices and	100	 density took	10149.138526	ms
+Ford-Fulkerson for List type graph 	200	vertices and	25	 density took	76703.024735	ms
+Ford-Fulkerson for List type graph 	200	vertices and	50	 density took	80398.978353	ms
+Ford-Fulkerson for List type graph 	200	vertices and	75	 density took	88584.903766	ms
+Ford-Fulkerson for List type graph 	200	vertices and	100	 density took	11132.452945	ms
+Ford-Fulkerson for List type graph 	300	vertices and	25	 density took	5348.226795	ms
+Ford-Fulkerson for List type graph 	300	vertices and	25	 density took	175411.765175	ms
+Ford-Fulkerson for List type graph 	300	vertices and	50	 density took	259032.104353	ms
+Ford-Fulkerson for List type graph 	300	vertices and	75	 density took	261237.611563	ms
+Ford-Fulkerson for List type graph 	300	vertices and	100	 density took	308057.219681	ms

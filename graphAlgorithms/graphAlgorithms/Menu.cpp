@@ -158,7 +158,7 @@ void Menu::mainMenu()
 		case '9'://run all the tests
 		{
 			auto testUnit = std::make_unique<TestUnit>();
-			testUnit->testAndMeasure();
+			testUnit->testAndMeasure(100, 1000, 100, 10);
 		}
 			break;
 

@@ -1,0 +1,13 @@
+AStar for Matrix type graph 	100	vertices and	25	 density took	0.873700	ms
+AStar for Matrix type graph 	100	vertices and	50	 density took	0.732626	ms
+AStar for Matrix type graph 	100	vertices and	75	 density took	0.765805	ms
+AStar for Matrix type graph 	100	vertices and	100	 density took	0.746024	ms
+AStar for Matrix type graph 	200	vertices and	25	 density took	1.498655	ms
+AStar for Matrix type graph 	200	vertices and	50	 density took	1.629427	ms
+AStar for Matrix type graph 	200	vertices and	75	 density took	1.596212	ms
+AStar for Matrix type graph 	200	vertices and	100	 density took	0.275102	ms
+AStar for Matrix type graph 	300	vertices and	25	 density took	0.150876	ms
+AStar for Matrix type graph 	300	vertices and	25	 density took	2.408286	ms
+AStar for Matrix type graph 	300	vertices and	50	 density took	1.994139	ms
+AStar for Matrix type graph 	300	vertices and	75	 density took	2.127120	ms
+AStar for Matrix type graph 	300	vertices and	100	 density took	3.485538	ms
