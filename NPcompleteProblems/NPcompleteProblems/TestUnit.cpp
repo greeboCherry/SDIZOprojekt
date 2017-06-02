@@ -13,10 +13,11 @@ TestUnit::~TestUnit()
 
 void TestUnit::showRandomKnapsack()
 {
-	Knapsack sack(2, 5, 5, 10, 5, 10);
+	Knapsack sack(5, 24, 5, 10, 5, 10);
 
 	std::cout << sack.fullness << std::endl << Knapsack::toString(sack.itemPool);
 	std::cout << "Greedy result:"<< Knapsack::toString(sack.greedy());
+	std::cout << "Bruteforce result:" << Knapsack::toString(sack.brute());
 }
 
 void TestUnit::testBoolsIncrement(int size)

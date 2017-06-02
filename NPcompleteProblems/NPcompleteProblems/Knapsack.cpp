@@ -94,6 +94,7 @@ std::vector<Item> Knapsack::brute()
 		thisTryValue = 0;
 		for (unsigned int j = 0; j < itemPool.size(); j++)	//follow 0-1 list of to take or not to take
 		{
+			Knapsack::incerementBoolVector(takeList);
 			auto it= itemPool.begin();
 			if (takeList[j])
 			{
@@ -109,20 +110,6 @@ std::vector<Item> Knapsack::brute()
 		}
 
 	}
-//	takeList
-	/*
-	add 1 to lowest=
-			if there is zero, just make it one
-1_:			else	make it zero, shift right 
-					if it's zero, make it one
-						else 
-	
-	1001010101010111
-	+			   1
-=	1001010101011000
-
-	*/
-
 
 	return  result;
 }

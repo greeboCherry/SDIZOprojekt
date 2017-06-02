@@ -14,6 +14,7 @@ int main()
 	TestUnit tu;
 	tu.testBoolsIncrement(3);
 	tu.showRandomKnapsack();
+	
 
 	std::cout << "Insert any char to exit\n";
 
