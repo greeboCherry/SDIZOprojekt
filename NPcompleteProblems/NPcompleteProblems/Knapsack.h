@@ -33,10 +33,13 @@ public:
 	void loadItemsFromFile(std::string fileName);
 	float randomLoot(int itemNum, int minSize, int maxSize, int minValue, int maxValue);
 
-	void greedy();
+	std::vector<Item> greedy();
+
+	std::vector<Item> brute();
 
 	static std::string toString(const std::vector<Item>& sack);
 //	std::vector<Item> 
 
+	bool static incerementBoolVector(std::vector<bool>& vector);
 };
 
