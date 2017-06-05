@@ -144,26 +144,26 @@ std::vector<Item> Knapsack::dynamic()
 	}
 
 	
-	for (unsigned int itemIndex = 1; itemIndex < itemPool.size();itemIndex++)	//we set 0'th row above
-		for (int currentSize = 1; currentSize < tempLimit; currentSize++)	//for sack sizeLimit==0 we can't fit anything
+	for (unsigned int i = 1; i < itemPool.size();i++)	//we set 0'th row above
+		for (int j = 1; j < tempLimit; j++)	//for sack sizeLimit==0 we can't fit anything
 		{
-			if (itemPool[itemIndex].size>currentSize)	//if item won't fit that size of knapsack, just copy values from row above
+			if (itemPool[i].size>j)	//if item won't fit that size of knapsack, just copy values from row above
 			{
-				valueMatrix[currentSize + itemIndex*tempLimit] = valueMatrix[currentSize + (itemIndex - 1)*tempLimit];
-				takeMatrix[currentSize + itemIndex*tempLimit] = takeMatrix[currentSize + (itemIndex - 1)*tempLimit];
+				valueMatrix[j + i*tempLimit] = valueMatrix[j + (i - 1)*tempLimit];
+				takeMatrix[j + i*tempLimit] = takeMatrix[j + (i - 1)*tempLimit];
 			}
 			else  //now if it fits
 			{
 					//add it
-				if (itemPool[itemIndex].value + valueMatrix[currentSize-itemPool[itemIndex].size+(itemIndex-1)*tempLimit] > valueMatrix[currentSize + (itemIndex - 1)*tempLimit])
+				if (itemPool[i].value + valueMatrix[j-itemPool[i].size+(i-1)*tempLimit] > valueMatrix[j + (i - 1)*tempLimit])
 				{
-					valueMatrix[currentSize + itemIndex*tempLimit] = itemPool[itemIndex].value + valueMatrix[currentSize - itemPool[itemIndex].size + (itemIndex - 1)*tempLimit];
-					takeMatrix[currentSize + itemIndex*tempLimit] = itemIndex;	
+					valueMatrix[j + i*tempLimit] = itemPool[i].value + valueMatrix[j - itemPool[i].size + (i - 1)*tempLimit];
+					takeMatrix[j + i*tempLimit] = i;	
 				}
 				else	//just replace
 				{
-					valueMatrix[currentSize + itemIndex*tempLimit] = valueMatrix[currentSize + (itemIndex - 1)*tempLimit];
-					takeMatrix[currentSize + itemIndex*tempLimit] = itemIndex;
+					valueMatrix[j + i*tempLimit] = valueMatrix[j + (i - 1)*tempLimit];
+					takeMatrix[j + i*tempLimit] = takeMatrix[j + (i - 1)*tempLimit];
 				}
 			}
 			
@@ -188,7 +188,7 @@ std::vector<Item> Knapsack::dynamic()
 	}
 	//-------------------END OF DEBUG
 
-	int index = takeMatrix.size()-1;
+	auto index = takeMatrix.size()-1;
 	while (index> takeMatrix.size()-tempLimit)
 	{
 		result.push_back(itemPool[takeMatrix[index]]);
