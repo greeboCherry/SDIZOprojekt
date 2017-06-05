@@ -20,25 +20,28 @@ struct Item
 class Knapsack
 {
 	int sizeLimit;
-	
+	float fullness;
 		
 public:
-	float fullness;
+
+	float getFullness(){ return fullness; }
+	int getSizeLimit() { return sizeLimit; }
 	std::vector<Item> itemPool;
 	Knapsack();
-	Knapsack(int itemNum, int sackSize, int minItemSize, int maxItemSize, int minValue, int maxValue);
+	Knapsack(int itemNum, int sackSize, int minItemSize, int maxItemSize, int minValue, int maxValue);	//runs randomLoot(...)until fullnes >=1.25
 	~Knapsack();
-	//set new sizeLimit(volume, weight, whatever of Knapsack
-	inline void resize(int newSize) { sizeLimit = newSize; }
+
+	inline void resize(int newSize) { sizeLimit = newSize; } 	//set new sizeLimit(volume, weight, whatever of Knapsack
 	void loadItemsFromFile(std::string fileName);
-	float randomLoot(int itemNum, int minSize, int maxSize, int minValue, int maxValue);
+	float randomLoot(int itemNum, int minSize, int maxSize, int minValue, int maxValue);	//generate random set of items with givven starting values. 
 
 	std::vector<Item> greedy();
 
 	std::vector<Item> brute();
 
+	std::vector<Item> dynamic();//http://www-users.mat.uni.torun.pl/~henkej/knapsack.pdf
 	static std::string toString(const std::vector<Item>& sack);
-//	std::vector<Item> 
+
 
 	bool static incerementBoolVector(std::vector<bool>& vector);
 };

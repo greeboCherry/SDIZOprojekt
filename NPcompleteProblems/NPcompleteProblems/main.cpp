@@ -12,7 +12,7 @@
 int main()
 {
 	TestUnit tu;
-	tu.testBoolsIncrement(3);
+	//tu.testBoolsIncrement(5);
 	tu.showRandomKnapsack();
 	
 

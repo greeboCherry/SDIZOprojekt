@@ -83,24 +83,25 @@ std::vector<Item> Knapsack::brute()
 	int thisTryVolume;
 	int thisTryValue;
 	
-	int stop = itemPool.size();
 	std::vector<bool> takeList;
-	takeList.resize(stop, false);
-	stop *= stop;//we have n^2 possible combinations 
-	for (int i = 0; i < stop; i++)	//run all possible combinations
+	takeList.resize(itemPool.size(), false);
+	
+	while (Knapsack::incerementBoolVector(takeList))//run all possible combinations(stops on register overflow)
 	{
+
 		thisTry.clear();
 		thisTryVolume = 0;
 		thisTryValue = 0;
+
 		for (unsigned int j = 0; j < itemPool.size(); j++)	//follow 0-1 list of to take or not to take
 		{
-			Knapsack::incerementBoolVector(takeList);
+			
 			auto it= itemPool.begin();
-			if (takeList[j])
+			if (takeList.at(j))
 			{
-				thisTry.push_back(*it);
-				thisTryVolume += it->size;
-				thisTryValue += it->value;
+				thisTry.push_back(itemPool[j]);
+				thisTryVolume += itemPool[j].size;
+				thisTryValue += itemPool[j].value;
 			}
 		}
 		if (thisTryVolume <= sizeLimit && thisTryValue>bestResultValue)
@@ -108,7 +109,6 @@ std::vector<Item> Knapsack::brute()
 			result = thisTry;
 			bestResultValue = thisTryValue;
 		}
-
 	}
 
 	return  result;
@@ -116,6 +116,87 @@ std::vector<Item> Knapsack::brute()
 
 
 
+
+std::vector<Item> Knapsack::dynamic()
+{
+	/*
+	 S I Z E 
+	I X X X X
+	T X X X X
+	E X X X X
+	M X X X X
+	(x,y)=[x + y * width]
+	numeration starts from 0
+	*/
+	std::vector<Item> result;
+	auto tempLimit = sizeLimit+1; //we need array [0;sizeLimit], not [0;sizeLimit-1]
+	std::vector<int> valueMatrix;
+	valueMatrix.resize(itemPool.size()*tempLimit,0);
+	std::vector<int> takeMatrix;
+	takeMatrix.resize(itemPool.size() * tempLimit,-1);
+	for (int i = 1; i < tempLimit; i++)
+	{
+		if (itemPool[0].size <= i)
+		{
+			takeMatrix[i] = 0;
+			valueMatrix[i] = itemPool[0].value;
+		}
+	}
+
+	
+	for (unsigned int itemIndex = 1; itemIndex < itemPool.size();itemIndex++)	//we set 0'th row above
+		for (int currentSize = 1; currentSize < tempLimit; currentSize++)	//for sack sizeLimit==0 we can't fit anything
+		{
+			if (itemPool[itemIndex].size>currentSize)	//if item won't fit that size of knapsack, just copy values from row above
+			{
+				valueMatrix[currentSize + itemIndex*tempLimit] = valueMatrix[currentSize + (itemIndex - 1)*tempLimit];
+				takeMatrix[currentSize + itemIndex*tempLimit] = takeMatrix[currentSize + (itemIndex - 1)*tempLimit];
+			}
+			else  //now if it fits
+			{
+					//add it
+				if (itemPool[itemIndex].value + valueMatrix[currentSize-itemPool[itemIndex].size+(itemIndex-1)*tempLimit] > valueMatrix[currentSize + (itemIndex - 1)*tempLimit])
+				{
+					valueMatrix[currentSize + itemIndex*tempLimit] = itemPool[itemIndex].value + valueMatrix[currentSize - itemPool[itemIndex].size + (itemIndex - 1)*tempLimit];
+					takeMatrix[currentSize + itemIndex*tempLimit] = itemIndex;	
+				}
+				else	//just replace
+				{
+					valueMatrix[currentSize + itemIndex*tempLimit] = valueMatrix[currentSize + (itemIndex - 1)*tempLimit];
+					takeMatrix[currentSize + itemIndex*tempLimit] = itemIndex;
+				}
+			}
+			
+		}
+	//-------------------DEBUG WRITE!
+	for (unsigned int j = 0; j < itemPool.size(); j++)
+	{		
+			for (int i = 0; i < tempLimit; i++)
+		{
+			std::cout << takeMatrix[i + j*tempLimit]<<"\t";
+		}
+		std::cout << std::endl;
+	}
+
+	for (unsigned int j = 0; j < itemPool.size(); j++)
+	{
+		for (int i = 0; i < tempLimit; i++)
+		{
+			std::cout << valueMatrix[i + j*tempLimit] << "\t";
+		}
+		std::cout << std::endl;
+	}
+	//-------------------END OF DEBUG
+
+	int index = takeMatrix.size()-1;
+	while (index> takeMatrix.size()-tempLimit)
+	{
+		result.push_back(itemPool[takeMatrix[index]]);
+		index -= itemPool[takeMatrix[index]].size;
+	}
+
+	return result;
+}
 
 std::string Knapsack::toString(const std::vector<Item>& sack)
 {

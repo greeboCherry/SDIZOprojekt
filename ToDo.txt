@@ -4,7 +4,7 @@ struktura plecaka(pojemnoœæ)
 algorytmy do plecaka
 prezgl¹d zupe³ny
 algorytm zach³anny
-algorytm opartny na programowaniu dynamicznym????
+algorytm opartny na programowaniu dynamicznym????   https://www.commonlounge.com/discussion/47e7c35e5f574032ab78bc10bfa71ddb
 
 read from file
 
@@ -12,3 +12,4 @@ pomiar czasu
 
 algorytmy do Komi
 d zupe³ny, e zach³anny, f... algorytm przeszukiwania lokalnego
+
