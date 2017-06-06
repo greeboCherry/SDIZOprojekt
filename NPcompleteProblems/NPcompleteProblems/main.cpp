@@ -13,12 +13,14 @@ int main()
 {
 	TestUnit tu;
 	//tu.testBoolsIncrement(5);
-	tu.showRandomKnapsack();
+	for (int i = 0; i < 10;i++)
+	{
+		tu.showRandomKnapsack();
+		std::cout << i << " didn't crush\n\n";
+	}
+	tu.comapreBruteDynamicResults(1000);
 	
-
 	std::cout << "Insert any char to exit\n";
-
-
 	std::cin.get();
 
 	return 0;
