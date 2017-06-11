@@ -23,12 +23,12 @@ public:
 	float getFullness(){ return fullness; }
 	int getSizeLimit() { return sizeLimit; }
 	std::vector<Item> itemPool;
-	Knapsack(int sackSize);
+	Knapsack(int sackSize=1);
 	Knapsack(int itemNum, int sackSize, int minItemSize, int maxItemSize, int minValue, int maxValue);	//runs randomLoot(...)until fullnes >=1.25
 	~Knapsack();
 
 	inline void resize(int newSize) { sizeLimit = newSize; } 	//set new sizeLimit(volume, weight, whatever of Knapsack
-	void loadItemsFromFile(std::string fileName);
+	bool loadItemsFromFile(std::string path);	//format: sizeLimit, itemCount, [nth item size, nth item value]
 	float randomLoot(int itemNum, int minSize, int maxSize, int minValue, int maxValue);	//generate random set of items with given starting values. 
 
 	std::vector<Item> greedy();

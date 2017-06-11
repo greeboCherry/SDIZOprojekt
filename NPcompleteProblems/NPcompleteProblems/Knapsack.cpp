@@ -2,7 +2,7 @@
 #include <random>
 #include <algorithm>
 #include <iostream>
-#include <cassert>
+#include <fstream>
 
 Knapsack::Knapsack(int sackSize):sizeLimit(sackSize)
 {
@@ -23,10 +23,31 @@ Knapsack::~Knapsack()
 {
 }
 
+bool Knapsack::loadItemsFromFile(std::string path)
+{
+	std::fstream file(path, std::fstream::in);
+	if (!file || !file.good())
+	{
+		std::cout << "Couldn't open file at: " << path.c_str() << std::endl;
+		return false;
+	}
+	int f_sizeLimit, f_itemNum, f_size, f_value;
+	file >> f_sizeLimit>>f_itemNum;
+	resize(f_sizeLimit);
+	for (int i = 0; i < f_itemNum; i++)
+	{
+		file >> f_size >> f_value;
+		itemPool.push_back(Item(f_size, f_value));
+	}
+	file.close();
+	return true;
+
+}
+
 float Knapsack::randomLoot(int itemNum, int minSize, int maxSize, int minValue, int maxValue)
 {
 	std::random_device rd; 
-	std::mt19937 messmer(rd());
+	std::mt19937 mersenne(rd());
 	std::uniform_int_distribution<int> sizeDist(minSize, maxSize);
 	std::uniform_int_distribution<int> valueDist(minValue, maxValue);
 	
@@ -36,7 +57,7 @@ float Knapsack::randomLoot(int itemNum, int minSize, int maxSize, int minValue, 
 	itemPool.reserve(itemNum);
 	for (int i = 0; i < itemNum; i++)
 	{
-		itemPool.push_back(Item(sizeDist(messmer), valueDist(messmer)));
+		itemPool.push_back(Item(sizeDist(mersenne), valueDist(mersenne)));
 		totalSize += itemPool[i].size;
 	}
 		
@@ -140,7 +161,6 @@ std::vector<Item> Knapsack::dynamic()
 		}
 	}
 
-	
 	for (unsigned int i = 1; i < itemPool.size();i++)	//we set 0'th row above
 		for (int j = 1; j < tempLimit; j++)	//for sack sizeLimit==0 we can't fit anything
 		{
@@ -164,16 +184,16 @@ std::vector<Item> Knapsack::dynamic()
 			
 		}
 	//-------------------DEBUG WRITE of this damn table!
-/*
-	for (unsigned int j = 0; j < itemPool.size(); j++)
-	{
-		for (int i = 0; i < tempLimit; i++)
-		{
-			std::cout << valueMatrix[i + j*tempLimit] << "\t";
-		}
-		std::cout << std::endl;
-	}
-*/
+
+// 	for (unsigned int j = 0; j < itemPool.size(); j++)
+// 	{
+// 		for (int i = 0; i < tempLimit; i++)
+// 		{
+// 			std::cout << valueMatrix[i + j*tempLimit] << "\t";
+// 		}
+// 		std::cout << std::endl;
+// 	}
+
 	//----------backtracking
 
 int index = valueMatrix.size()-1;
@@ -242,6 +262,7 @@ bool Knapsack::incerementBoolVector(std::vector<bool>& vector)
 			
 			*itTL = false;
 			itTL++;
+
 			if (itTL == vector.rend())
 			{
 				return false; //overflow

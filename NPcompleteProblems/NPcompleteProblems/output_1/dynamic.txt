@@ -1,0 +1,3 @@
+Time for dynamic algorithm running for	30	sack size and	10	items took	0.003158	ms
+Time for dynamic algorithm running for	30	sack size and	20	items took	0.004342	ms
+Time for dynamic algorithm running for	30	sack size and	30	items took	0.005132	ms

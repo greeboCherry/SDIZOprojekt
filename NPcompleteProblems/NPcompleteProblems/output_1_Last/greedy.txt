@@ -1,0 +1,9 @@
+Time for greedy algorithm running for	10	sack size and	20	items took	0.012632	ms
+Time for greedy algorithm running for	10	sack size and	24	items took	0.002369	ms
+Time for greedy algorithm running for	10	sack size and	28	items took	0.003158	ms
+Time for greedy algorithm running for	10	sack size and	32	items took	0.003553	ms
+Time for greedy algorithm running for	10	sack size and	36	items took	0.004342	ms
+Time for greedy algorithm running for	20	sack size and	20	items took	0.002763	ms
+Time for greedy algorithm running for	20	sack size and	24	items took	0.003553	ms
+Time for greedy algorithm running for	20	sack size and	28	items took	0.004342	ms
+Time for greedy algorithm running for	20	sack size and	32	items took	0.003948	ms

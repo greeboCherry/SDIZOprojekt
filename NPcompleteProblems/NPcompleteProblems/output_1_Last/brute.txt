@@ -1,0 +1,9 @@
+Time for bruteforce algorithm running for	10	sack size and	20	items took	120.139160	ms
+Time for bruteforce algorithm running for	10	sack size and	24	items took	2193.652386	ms
+Time for bruteforce algorithm running for	10	sack size and	28	items took	39716.954497	ms
+Time for bruteforce algorithm running for	10	sack size and	32	items took	676984.053396	ms
+Time for bruteforce algorithm running for	10	sack size and	36	items took	12055142.171337	ms
+Time for bruteforce algorithm running for	20	sack size and	20	items took	121.795560	ms
+Time for bruteforce algorithm running for	20	sack size and	24	items took	2168.458995	ms
+Time for bruteforce algorithm running for	20	sack size and	28	items took	38657.702262	ms
+Time for bruteforce algorithm running for	20	sack size and	32	items took	668538.451700	ms
