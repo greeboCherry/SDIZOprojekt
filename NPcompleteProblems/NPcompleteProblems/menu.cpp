@@ -106,7 +106,7 @@ void menu::mainMenu()
  		{
 			TestUnit tu;
 			for (int sackSize = 1000; sackSize <= 3000; sackSize += 1000)
-				for (int itemNum = 32; itemNum <= 100; itemNum += 4)
+				for (int itemNum = 932; itemNum <= 1000; itemNum += 4)
 				{
 					std::cout << "Running in the " << itemNum << sackSize << "'s" << std::endl;
 					tu.testAndMeasure(itemNum, sackSize, 100, itemNum<=26);
